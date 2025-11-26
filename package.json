@@ -1,7 +1,7 @@
 {
   "name": "resume-crafter",
   "version": "1.0.0",
-  "description": "A static website generator for creating professional resume websites from JSON configuration files",
+  "description": "A modern static website generator for creating beautiful, professional resume websites from YAML configuration files",
   "main": "src/index.js",
   "bin": {
     "resume-crafter": "./src/cli.js"
@@ -18,9 +18,19 @@
     "type": "git",
     "url": "git+https://github.com/JasonBenett/resume-crafter.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "resume",
+    "cv",
+    "static-site-generator",
+    "yaml",
+    "handlebars",
+    "tailwind",
+    "portfolio",
+    "i18n",
+    "themes"
+  ],
+  "author": "Resume Crafter (Created with Claude Code)",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/JasonBenett/resume-crafter/issues"
