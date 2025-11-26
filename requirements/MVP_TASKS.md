@@ -110,11 +110,11 @@ This document outlines the detailed tasks required to build a functional first M
 - [x] Add `--output` flag to specify output directory
 - [ ] Add `--watch` flag for development mode (using npm run dev with chokidar instead)
 
-### 6.2 Developer Experience
+### 6.2 Developer Experience ✅
 - [x] Add helpful command-line output (progress, success/error messages)
-- [ ] Implement `init` command to scaffold example config
-- [ ] Add `list-themes` command to show available themes
-- [ ] Create `validate` command to check config without building
+- [x] Implement `init` command to scaffold example config
+- [x] Add `list-themes` command to show available themes
+- [x] Create `validate` command to check config without building
 
 ## Phase 7: Documentation & Examples
 

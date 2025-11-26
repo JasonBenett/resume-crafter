@@ -36,13 +36,32 @@ The generated site will be in the `dist/` directory. Open `dist/index.html` in y
 
 ## 📖 Usage
 
+### Directory Structure
+
+Resume Crafter separates user content from project files:
+
+```
+resume-crafter/
+├── resumes/              # Your personal resume configurations (gitignored)
+│   ├── resume.yaml       # Your main resume
+│   ├── locales/          # Your translations (optional)
+│   └── README.md         # Guide for managing multiple resumes
+├── examples/             # Example configurations for reference
+├── themes/               # Theme templates
+└── dist/                 # Generated output
+```
+
+Your resume files in `resumes/` are automatically ignored by git to keep your personal information private.
+
 ### Create Your Resume
 
-1. **Copy the example configuration:**
+1. **Initialize a new resume configuration:**
 
 ```bash
-cp examples/basic/resume.yaml my-resume.yaml
+node src/cli.js init
 ```
+
+This creates `resumes/resume.yaml` - your personal resume configuration.
 
 2. **Edit your resume data:**
 
@@ -76,10 +95,10 @@ experience:
 3. **Build your resume:**
 
 ```bash
-node src/cli.js build -c my-resume.yaml
+node src/cli.js build
 ```
 
-Or use npm scripts:
+Or use npm scripts (builds the example resume):
 
 ```bash
 npm run build
@@ -92,7 +111,7 @@ Resume Crafter uses a powerful theme system built on Handlebars templates.
 ### Using a Theme
 
 ```bash
-node src/cli.js build -c my-resume.yaml -t default
+node src/cli.js build -t default
 ```
 
 ### Creating a Custom Theme
@@ -132,10 +151,10 @@ themes/
 
 ## 🌍 Multi-language Support
 
-Add translations by creating locale files:
+Add translations by creating locale files in your resumes directory:
 
 ```
-my-resume-project/
+resumes/
   resume.yaml           # Your resume data
   locales/
     en/
@@ -161,7 +180,7 @@ labels:
 **Build with locale:**
 
 ```bash
-node src/cli.js build -c resume.yaml -l fr
+node src/cli.js build -l fr
 ```
 
 ## 📋 Configuration Reference
@@ -264,17 +283,50 @@ resume-crafter/
 - `npm run format` - Format code with Prettier
 - `npm test` - Run tests
 
-### CLI Options
+### CLI Commands
+
+#### Initialize a New Resume
+
+Create a starter configuration file:
+
+```bash
+node src/cli.js init [options]
+
+Options:
+  -o, --output <path>   Output file path (default: "resumes/resume.yaml")
+```
+
+#### Build Resume
+
+Build a resume website from configuration:
 
 ```bash
 node src/cli.js build [options]
 
 Options:
-  -c, --config <path>    Path to config file (default: "./resume.yaml")
+  -c, --config <path>    Path to config file (default: "resumes/resume.yaml")
   -t, --theme <name>     Theme name to use (default: "default")
   -o, --output <path>    Output directory (default: "./dist")
   -l, --language <code>  Language code (default: "en")
-  -h, --help            Display help
+```
+
+#### List Available Themes
+
+Display all available themes with their metadata:
+
+```bash
+node src/cli.js list-themes
+```
+
+#### Validate Configuration
+
+Validate a resume configuration file without building:
+
+```bash
+node src/cli.js validate [options]
+
+Options:
+  -c, --config <path>   Path to config file (default: "resumes/resume.yaml")
 ```
 
 ## 🤝 Contributing

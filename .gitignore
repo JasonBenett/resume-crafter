@@ -29,3 +29,9 @@ coverage/
 # Temporary files
 *.tmp
 .cache/
+
+# User resume configurations (keep folder structure, ignore content)
+resumes/*.yaml
+resumes/*.yml
+resumes/locales/
+!resumes/README.md
