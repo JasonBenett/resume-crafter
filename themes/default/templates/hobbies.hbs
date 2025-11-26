@@ -1,0 +1,11 @@
+<section class="hobbies">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-primary-500 pb-2">
+    {{t "sections.hobbies"}}
+  </h2>
+
+  <div class="flex flex-wrap gap-3">
+    {{#each hobbies}}
+      <span class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg">{{this}}</span>
+    {{/each}}
+  </div>
+</section>

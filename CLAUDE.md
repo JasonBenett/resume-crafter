@@ -17,7 +17,10 @@ Key features:
 - `requirements/MVP_TASKS.md` - Detailed MVP task list (kept up-to-date with progress)
   - **Phase 1: Project Foundation & Setup** ✅ Complete
   - **Phase 2: Configuration System** ✅ Complete
-  - Phase 3-9: In progress
+  - **Phase 3: Theme System Architecture** ✅ Complete
+  - **Phase 4: Static Site Generator Engine** ✅ Mostly Complete
+  - **Phase 5: Default Theme Implementation** ✅ Complete
+  - Phase 6-9: Partially complete/In progress
 
 ## Tech Stack
 
@@ -118,13 +121,55 @@ node src/cli.js build -c examples/basic/resume.yaml
 node src/cli.js build -c examples/basic/resume.yaml -l fr
 ```
 
-### Build Pipeline (Phase 1 - Complete)
+### Theme System (Phase 3 - Complete)
 
-1. Clean output directory
-2. Process CSS with Tailwind v4 via PostCSS
-3. Copy theme assets to output
-4. (Phase 4) Generate HTML from templates and config
-5. (Phase 4) Optimize output files
+**Handlebars-based Templating:**
+- Uses Handlebars for flexible, powerful templates
+- Support for partials (reusable components)
+- Custom helpers: `formatDate`, `hasItems`, `eq`, `t` (translations)
+- Theme configuration via theme.json
+
+**Theme Structure:**
+```
+themes/
+  default/
+    theme.json           # Theme metadata and configuration
+    templates/
+      index.hbs          # Main template
+      header.hbs         # Header partial
+      experience.hbs     # Experience section
+      education.hbs      # Education section
+      skills.hbs         # Skills section
+      languages.hbs      # Languages section
+      hobbies.hbs        # Hobbies section
+      social.hbs         # Social links section
+    assets/
+      styles.css         # Theme CSS with Tailwind
+```
+
+**Theme Discovery & Loading:**
+- Automatic theme discovery in `themes/` directory
+- JSON schema validation for theme.json
+- Theme loader with error handling
+- Support for custom themes
+
+**Default Theme Features:**
+- Clean, professional design
+- Responsive layout (mobile-friendly)
+- Print-friendly styles
+- All content sections supported
+- Tailwind CSS styling with custom primary colors
+
+### Build Pipeline
+
+1. Load and validate resume configuration (YAML)
+2. Load and merge locale translations (if available)
+3. Load and initialize theme (Handlebars templates)
+4. Clean output directory
+5. Generate HTML from templates + data
+6. Process CSS with Tailwind v4 via PostCSS
+7. Copy theme assets (images, fonts, etc.)
+8. Output ready-to-deploy static site
 
 ### Code Quality
 

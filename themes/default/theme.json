@@ -1,0 +1,24 @@
+{
+  "name": "Default Professional",
+  "version": "1.0.0",
+  "description": "A clean, professional resume theme with responsive design",
+  "author": "Resume Crafter",
+  "supportedLanguages": ["en", "fr", "es", "de"],
+  "templates": {
+    "main": "index.hbs",
+    "partials": [
+      "header.hbs",
+      "experience.hbs",
+      "education.hbs",
+      "skills.hbs",
+      "languages.hbs",
+      "hobbies.hbs",
+      "social.hbs"
+    ]
+  },
+  "assets": {
+    "styles": "styles.css",
+    "images": [],
+    "fonts": []
+  }
+}

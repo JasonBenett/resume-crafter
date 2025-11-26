@@ -1,0 +1,18 @@
+<section class="skills">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-primary-500 pb-2">
+    {{t "sections.skills"}}
+  </h2>
+
+  <div class="space-y-4">
+    {{#each skills}}
+      <div class="skill-category">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">{{this.category}}</h3>
+        <div class="flex flex-wrap gap-2">
+          {{#each this.items}}
+            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-md text-sm">{{this}}</span>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>

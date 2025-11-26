@@ -1,0 +1,39 @@
+<header class="bg-primary-600 text-white p-8">
+  <div class="flex items-start justify-between">
+    <div class="flex-1">
+      <h1 class="text-4xl font-bold mb-2">{{profile.name}}</h1>
+
+      <div class="space-y-1 text-primary-100">
+        {{#if profile.email}}
+          <div class="flex items-center">
+            <span>📧 {{profile.email}}</span>
+          </div>
+        {{/if}}
+
+        {{#if profile.phone}}
+          <div class="flex items-center">
+            <span>📱 {{profile.phone}}</span>
+          </div>
+        {{/if}}
+
+        {{#if profile.city}}
+          <div class="flex items-center">
+            <span>📍 {{profile.city}}{{#if profile.country}}, {{profile.country}}{{/if}}</span>
+          </div>
+        {{/if}}
+
+        {{#if profile.website}}
+          <div class="flex items-center">
+            <span>🌐 <a href="{{profile.website}}" class="hover:underline">{{profile.website}}</a></span>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  {{#if profile.introduction}}
+    <div class="mt-6 text-primary-50 leading-relaxed">
+      <p>{{profile.introduction}}</p>
+    </div>
+  {{/if}}
+</header>

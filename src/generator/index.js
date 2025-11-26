@@ -1,8 +1,14 @@
 const path = require('path');
 const { processCSS } = require('../utils/cssProcessor');
-const { cleanDir, ensureDir } = require('../utils/fileHandler');
+const {
+  cleanDir,
+  ensureDir,
+  writeFile,
+  copyDir,
+} = require('../utils/fileHandler');
 const { loadAndValidateConfig } = require('../config');
 const { loadLocale, mergeConfigWithLocale } = require('../config/i18n');
+const { loadTheme, generateHTML } = require('../themes');
 
 /**
  * Build resume website from configuration
@@ -32,36 +38,60 @@ async function buildResume({ configPath, themeName, outputPath, language }) {
       );
     }
 
-    // TODO: In Phase 4, use config to generate HTML
-    // For now, we just validate it
     console.log(`✓ Loaded profile for: ${config.profile.name}`);
 
-    console.log(`Using theme: ${themeName}`);
+    // Load theme
+    console.log(`Loading theme: ${themeName}`);
+    const theme = await loadTheme(themeName);
+    console.log(`✓ Theme loaded: ${theme.config.name}`);
+
     console.log(`Output directory: ${outputPath}`);
 
     // Clean output directory
     await cleanDir(outputPath);
+    await ensureDir(outputPath);
 
-    // Resolve theme directory
-    const themePath = path.join(__dirname, '../../themes', themeName);
+    // Generate HTML from theme and config
+    console.log('Generating HTML...');
+    const html = generateHTML(theme, config);
+    const htmlOutput = path.join(outputPath, 'index.html');
+    await writeFile(htmlOutput, html);
+    console.log('✓ HTML generated');
 
     // Process CSS
-    const cssInput = path.join(themePath, 'assets/styles.css');
+    const cssInput = path.join(theme.path, 'assets/styles.css');
     const cssOutput = path.join(outputPath, 'styles.css');
-
-    await ensureDir(outputPath);
     console.log('Processing CSS with Tailwind...');
     await processCSS(cssInput, cssOutput);
+    console.log('✓ CSS processed');
 
-    // Copy theme assets (excluding CSS source)
-    // const assetsPath = path.join(themePath, 'assets');
+    // Copy theme assets (images, fonts, etc.)
+    const assetsPath = path.join(theme.path, 'assets');
     const outputAssetsPath = path.join(outputPath, 'assets');
 
-    console.log('Copying theme assets...');
-    await ensureDir(outputAssetsPath);
-    // In Phase 4, we'll copy other assets and generate HTML
+    try {
+      await ensureDir(outputAssetsPath);
+      // Copy all assets except styles.css (already processed)
+      const fs = require('fs').promises;
+      const assets = await fs.readdir(assetsPath);
+      for (const asset of assets) {
+        if (asset !== 'styles.css' && !asset.endsWith('.css')) {
+          const src = path.join(assetsPath, asset);
+          const dest = path.join(outputAssetsPath, asset);
+          const stat = await fs.stat(src);
+          if (stat.isFile()) {
+            await fs.copyFile(src, dest);
+          } else if (stat.isDirectory()) {
+            await copyDir(src, dest);
+          }
+        }
+      }
+      console.log('✓ Assets copied');
+    } catch {
+      console.log('ℹ No additional assets to copy');
+    }
 
-    console.log('Build pipeline configured successfully!');
+    console.log('✅ Build completed successfully!');
   } catch (error) {
     throw new Error(`Build failed: ${error.message}`);
   }
