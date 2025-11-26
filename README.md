@@ -2,222 +2,69 @@
 
 A modern, flexible static website generator for creating beautiful, professional resume websites from simple YAML configuration files.
 
-> **Note**: This entire project was created using [Claude Code](https://claude.com/claude-code), Anthropic's AI-powered development environment. From initial architecture to final implementation, Claude Code handled the complete development process including design decisions, code implementation, testing, and documentation.
+> **Note**: This entire project was created using [Claude Code](https://claude.com/claude-code), Anthropic's AI-powered development environment.
 
 ## ✨ Features
 
 - **📝 YAML Configuration** - Write your resume in human-friendly YAML format
 - **🎨 Theme System** - Fully customizable themes with Handlebars templates
-- **🌍 Multi-language Support** - Themes provide built-in UI translations (en, fr, es)
+- **🌍 Multi-language Support** - Build multilingual sites with inline content translation
 - **📱 Responsive Design** - Mobile-friendly and print-ready layouts
 - **✅ Schema Validation** - Comprehensive validation ensures data integrity
 - **🚀 Zero Database** - Pure static site generation
-- **⚡ Fast Build** - Quick compilation with Tailwind CSS
+- **⚡ Fast Build** - Quick compilation with Tailwind CSS v4
 - **🎯 SEO Ready** - Semantic HTML structure
-- **🖨️ Print Friendly** - Optimized for PDF export and printing
+- **🖨️ Print Friendly** - Optimized for PDF export
 
 ## 🚀 Quick Start
 
 ### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/JasonBenett/resume-crafter.git
 cd resume-crafter
-
-# Install dependencies
 npm install
-
-# Build the example resume
-npm run build
 ```
-
-The generated site will be in the `dist/` directory. Open `dist/index.html` in your browser to preview.
-
-## 📖 Usage
-
-### Directory Structure
-
-Resume Crafter separates user content from project files:
-
-```
-resume-crafter/
-├── resumes/              # Your personal resume configurations (gitignored)
-│   ├── resume.yaml       # Your main resume
-│   ├── locales/          # Your translations (optional)
-│   └── README.md         # Guide for managing multiple resumes
-├── examples/             # Example configurations for reference
-├── themes/               # Theme templates
-└── dist/                 # Generated output
-```
-
-Your resume files in `resumes/` are automatically ignored by git to keep your personal information private.
 
 ### Create Your Resume
 
-1. **Initialize a new resume configuration:**
-
 ```bash
+# Initialize a new resume
 node src/cli.js init
+
+# Edit resumes/resume.yaml with your information
+# Then build
+node src/cli.js build
+
+# Open in browser
+open dist/index.html
 ```
 
-This creates `resumes/resume.yaml` - your personal resume configuration.
+That's it! You now have a professional resume website.
 
-2. **Edit your resume data:**
+## 📖 Documentation
+
+- **[Getting Started](docs/getting-started.md)** - Detailed installation and first steps
+- **[Configuration Reference](docs/configuration.md)** - All available fields and options
+- **[Multi-Language Support](docs/multi-language.md)** - Create multilingual resumes
+- **[Themes Guide](docs/themes.md)** - Using and customizing themes
+- **[Theme Development](docs/theme-development.md)** - Creating custom themes
+- **[CLI Reference](docs/cli-reference.md)** - All command-line options
+- **[Deployment Guide](docs/deployment.md)** - Publish your resume online
+- **[Contributing](docs/contributing.md)** - Development guide
+
+## 🎨 Example
+
+**Input** (`resume.yaml`):
 
 ```yaml
 profile:
-  name: Your Name
-  email: your.email@example.com
-  phone: "+1 (555) 123-4567"
-  city: Your City
-  country: Your Country
-  introduction: |
-    Your professional summary here...
-
-experience:
-  - company: Company Name
-    position: Your Position
-    startDate: "2020-01"
-    endDate: present
-    description: Brief description of your role
-    tasks:
-      - Achievement or responsibility 1
-      - Achievement or responsibility 2
-    technologies:
-      - JavaScript
-      - React
-      - Node.js
-
-# ... more sections
-```
-
-3. **Build your resume:**
-
-```bash
-node src/cli.js build
-```
-
-Or use npm scripts (builds the example resume):
-
-```bash
-npm run build
-```
-
-## 🎨 Themes
-
-Resume Crafter uses a powerful theme system built on Handlebars templates.
-
-### Using a Theme
-
-```bash
-node src/cli.js build -t default
-```
-
-### Creating a Custom Theme
-
-1. Create a new directory in `themes/`:
-
-```
-themes/
-  my-theme/
-    theme.json           # Theme metadata
-    templates/
-      index.hbs          # Main template
-      header.hbs         # Partials
-      experience.hbs
-      # ... more partials
-    assets/
-      styles.css         # Theme styles
-```
-
-2. Configure your theme in `theme.json`:
-
-```json
-{
-  "name": "My Custom Theme",
-  "version": "1.0.0",
-  "description": "A custom theme for resumes",
-  "supportedLanguages": ["en", "fr"],
-  "templates": {
-    "main": "index.hbs",
-    "partials": ["header.hbs", "experience.hbs"]
-  },
-  "assets": {
-    "styles": "styles.css"
-  }
-}
-```
-
-## 🌍 Multi-language Support
-
-Resume Crafter automatically builds multi-language websites with dynamic language switching.
-
-### Automatic Multi-Language Builds
-
-By default, Resume Crafter detects all available languages and generates a multi-language site:
-
-```bash
-# Build all available languages
-node src/cli.js build
-
-# Generates:
-# - /index.html (language selector)
-# - /en/index.html (English)
-# - /fr/index.html (French)
-# - /es/index.html (Spanish)
-```
-
-### Language Configuration
-
-Control which languages to build and set a default:
-
-```yaml
-site:
-  languages: [en, fr]      # Only build English and French
-  defaultLanguage: en      # English at root
-
-profile:
-  name: John Doe
-  # ...
-```
-
-```bash
-node src/cli.js build
-
-# Generates:
-# - /index.html (English - default)
-# - /fr/index.html (French)
-# Note: Spanish not built because not in languages array
-```
-
-**Without `languages` configured:** Builds all available theme languages
-**Without `defaultLanguage` configured:** Shows language selector at root
-
-### Single Language Build
-
-Build only one language:
-
-```bash
-# Build specific language
-node src/cli.js build -l fr
-
-# Force single-language build (first available)
-node src/cli.js build --single-language
-```
-
-### Inline Content Translation
-
-Resume Crafter supports inline content translation, allowing you to provide language-specific versions of your resume content:
-
-**Example with translated content:**
-
-```yaml
-profile:
+  name: María García
+  email: maria@example.com
   introduction:
-    en: Experienced software engineer with a passion for building scalable applications.
-    fr: Ingénieure logicielle expérimentée passionnée par le développement d'applications évolutives.
-    es: Ingeniera de software experimentada con pasión por crear aplicaciones escalables.
+    en: Experienced software engineer...
+    fr: Ingénieure logicielle expérimentée...
+    es: Ingeniera de software experimentada...
 
 experience:
   - company: Tech Corp
@@ -225,301 +72,165 @@ experience:
       en: Senior Developer
       fr: Développeuse Senior
       es: Desarrolladora Senior
+    startDate: "2020-01"
+    endDate: present
     tasks:
-      - en: Led team of 5 developers
-        fr: Direction d'une équipe de 5 développeurs
-        es: Lideré un equipo de 5 desarrolladores
+      - Led team of 5 developers
+      - Improved performance by 40%
 ```
 
-**How it works:**
-- Any text field can be either a string or an object with language codes as keys
-- During build, each language version resolves to the appropriate translation
-- Falls back to English if target language not found
-- Falls back to first available language if neither target nor English exist
-
-**Translatable fields:**
-- Profile: `introduction`, `address`
-- Experience: `position`, `description`, `tasks` (array items)
-- Education: `degree`, `field`, `honors`, `description`
-- Skills: `category`, `items` (array items)
-- Languages: `language` (name)
-- Hobbies: array items
-
-See `examples/multilingual/resume.yaml` for a complete example.
-
-### Custom UI Labels (Optional)
-
-Themes provide default UI translations. Override specific labels if needed:
+**Output**: Professional website in 3 languages with automatic language switching!
 
 ```
-resumes/
-  resume.yaml           # Your resume data
-  locales/              # Optional: override theme translations
-    en/
-      content.yaml      # Custom English labels
+dist/
+├── index.html          # English (default)
+├── fr/index.html       # French
+├── es/index.html       # Spanish
+└── styles.css          # Compiled CSS
 ```
 
-**Example override (locales/en/content.yaml):**
+## 🌍 Multi-Language Features
+
+Resume Crafter makes multilingual resumes easy:
+
+### Inline Content Translation
 
 ```yaml
-sections:
-  experience: Work History    # Override default "Experience"
-  education: Academic Background
+position:
+  en: Software Engineer
+  fr: Ingénieur Logiciel
+  es: Ingeniero de Software
 ```
 
-**Default theme supports:** English (en), French (fr), Spanish (es)
-
-For complete locale structure, see `themes/default/locales/` or [Theme Development Guide](THEME_DEVELOPMENT.md#theme-locales).
-
-## 📋 Configuration Reference
-
-**Note:** Most text fields support inline translation. You can use either a simple string or an object with language codes:
-
-```yaml
-# Simple string
-introduction: "Software engineer with 5 years of experience"
-
-# Or multi-language object
-introduction:
-  en: "Software engineer with 5 years of experience"
-  fr: "Ingénieur logiciel avec 5 ans d'expérience"
-  es: "Ingeniero de software con 5 años de experiencia"
-```
-
-### Site Configuration (Optional)
+### Language Configuration
 
 ```yaml
 site:
-  languages: array of strings     # List of languages to build (e.g., ["en", "fr", "es"])
-                                  # If not specified, builds all available theme languages
-                                  # Must be valid theme-supported language codes
-
-  defaultLanguage: string         # 2-letter language code (e.g., "en", "fr", "es")
-                                  # If set, this language will be at root (/) instead of a language selector
-                                  # Other languages will be in subdirectories (e.g., /fr/, /es/)
-                                  # Must be included in the languages array if both are specified
+  languages: [en, fr, es]    # Build only these languages
+  defaultLanguage: en         # English at root
 ```
 
-### Profile Section
-
-```yaml
-profile:
-  name: string (required)
-  email: string (email format)
-  phone: string
-  city: string
-  country: string
-  address: string | translatable
-  website: string (URL)
-  introduction: string | translatable
-  photo: string (path or URL)
-```
-
-### Experience Section
-
-```yaml
-experience:
-  - company: string (required)
-    position: string | translatable (required)
-    location: string
-    startDate: string (YYYY-MM format, required)
-    endDate: string or null ("present" or YYYY-MM)
-    description: string | translatable
-    tasks: array of (string | translatable)
-    technologies: array of strings
-```
-
-### Education Section
-
-```yaml
-education:
-  - institution: string (required)
-    degree: string | translatable (required)
-    field: string | translatable
-    location: string
-    startDate: string (YYYY or YYYY-MM)
-    endDate: string or null
-    gpa: string or number
-    honors: string | translatable
-    description: string | translatable
-```
-
-### Skills Section
-
-```yaml
-skills:
-  - category: string | translatable
-    items: array of (string | translatable)
-```
-
-### Languages Section
-
-```yaml
-languages:
-  - language: string | translatable
-    proficiency: enum (native|fluent|advanced|intermediate|basic)
-```
-
-### Other Sections
-
-```yaml
-hobbies: array of (string | translatable)
-
-social:
-  - platform: string
-    url: string (required)
-    username: string
-```
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-resume-crafter/
-├── src/
-│   ├── cli.js              # CLI interface
-│   ├── generator/          # Build orchestration
-│   ├── config/             # YAML loading & validation
-│   ├── themes/             # Theme system
-│   └── utils/              # Utilities
-├── themes/
-│   └── default/            # Default theme
-├── examples/
-│   └── basic/              # Example resume
-└── dist/                   # Generated output
-```
-
-### Available Scripts
-
-- `npm run build` - Build the example resume
-- `npm run dev` - Watch mode for development
-- `npm run lint` - Run ESLint
-- `npm run format` - Format code with Prettier
-- `npm test` - Run tests
-
-### CLI Commands
-
-#### Initialize a New Resume
-
-Create a starter configuration file:
+### Automatic Builds
 
 ```bash
-node src/cli.js init [options]
+# Builds all configured languages in one command
+node src/cli.js build
 
-Options:
-  -o, --output <path>   Output file path (default: "resumes/resume.yaml")
+# Generates:
+# - / (English)
+# - /fr/ (French)
+# - /es/ (Spanish)
+# - Language switcher included!
 ```
 
-#### Build Resume
+Learn more in the [Multi-Language Guide](docs/multi-language.md).
 
-Build a resume website from configuration:
-
-```bash
-node src/cli.js build [options]
-
-Options:
-  -c, --config <path>    Path to config file (default: "resumes/resume.yaml")
-  -t, --theme <name>     Theme name to use (default: "default")
-  -o, --output <path>    Output directory (default: "./dist")
-  -l, --language <code>  Language code (default: "en")
-```
-
-#### List Available Themes
-
-Display all available themes with their metadata:
+## 🛠️ CLI Commands
 
 ```bash
+# Initialize new resume
+node src/cli.js init
+
+# Build resume
+node src/cli.js build
+
+# Build specific language
+node src/cli.js build -l fr
+
+# Validate configuration
+node src/cli.js validate
+
+# List available themes
 node src/cli.js list-themes
 ```
 
-#### Validate Configuration
+See [CLI Reference](docs/cli-reference.md) for all options.
 
-Validate a resume configuration file without building:
+## 📦 NPM Scripts
 
 ```bash
-node src/cli.js validate [options]
-
-Options:
-  -c, --config <path>   Path to config file (default: "resumes/resume.yaml")
+npm run build      # Build example resume
+npm run dev        # Watch mode for development
+npm test           # Run tests
+npm run lint       # Lint code
+npm run format     # Format code with Prettier
 ```
 
 ## 🚀 Deployment
 
-Your generated resume is a static website that can be deployed anywhere. Here are the most popular options:
+Deploy your resume to:
 
-### GitHub Pages
+- **[GitHub Pages](docs/deployment.md#github-pages)** - Free hosting for developers
+- **[Netlify](docs/deployment.md#netlify)** - Drag-and-drop or automatic deployment
+- **[Vercel](docs/deployment.md#vercel)** - Deploy with one command
 
-1. **Build your resume:**
+All options are free and include HTTPS with custom domains!
+
+See the [Deployment Guide](docs/deployment.md) for detailed instructions.
+
+## 🎨 Themes
+
+Resume Crafter uses a powerful theme system built on Handlebars templates.
+
+**Use a theme:**
+
 ```bash
-node src/cli.js build
+node src/cli.js build -t default
 ```
 
-2. **Create a new GitHub repository**
+**Create your own theme:**
 
-3. **Push the dist folder:**
-```bash
-cd dist
-git init
-git add .
-git commit -m "Deploy resume"
-git branch -M main
-git remote add origin https://github.com/yourusername/your-resume.git
-git push -u origin main
+See the [Theme Development Guide](docs/theme-development.md) for detailed instructions.
+
+## 📋 Configuration
+
+Basic configuration structure:
+
+```yaml
+site:
+  languages: [en, fr]
+  defaultLanguage: en
+
+profile:
+  name: Your Name
+  email: your.email@example.com
+  introduction: Your professional summary
+
+experience:
+  - company: Company Name
+    position: Your Position
+    startDate: "2020-01"
+    endDate: present
+
+education:
+  - institution: University Name
+    degree: Bachelor's Degree
+    field: Computer Science
+
+skills:
+  - category: Programming Languages
+    items: [JavaScript, Python, Go]
+
+languages:
+  - language: English
+    proficiency: native
 ```
 
-4. **Enable GitHub Pages:**
-   - Go to repository Settings → Pages
-   - Select "main" branch as source
-   - Your resume will be at `https://yourusername.github.io/your-resume`
-
-### Netlify
-
-1. **Build your resume:**
-```bash
-node src/cli.js build
-```
-
-2. **Deploy via Netlify CLI:**
-```bash
-npm install -g netlify-cli
-netlify deploy --dir=dist --prod
-```
-
-Or use the Netlify web interface to drag & drop the `dist` folder.
-
-### Vercel
-
-1. **Build your resume:**
-```bash
-node src/cli.js build
-```
-
-2. **Deploy via Vercel CLI:**
-```bash
-npm install -g vercel
-cd dist
-vercel --prod
-```
-
-Or connect your GitHub repository to Vercel for automatic deployments.
-
-### Custom Domain
-
-After deployment, you can add a custom domain:
-
-- **GitHub Pages**: Add a `CNAME` file in your dist folder before deploying
-- **Netlify**: Use the Netlify dashboard to add a custom domain
-- **Vercel**: Use the Vercel dashboard to add a custom domain
+See the [Configuration Reference](docs/configuration.md) for all available fields.
 
 ## 🤝 Contributing
 
-Contributions are welcome! This project was built entirely with Claude Code, demonstrating the power of AI-assisted development. Feel free to:
+Contributions are welcome! This project was built entirely with Claude Code.
 
-- Report bugs
-- Suggest features
-- Submit pull requests
-- Create custom themes
+To contribute:
+
+1. Read the [Contributing Guide](docs/contributing.md)
+2. Fork the repository
+3. Create a feature branch
+4. Make your changes
+5. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## 📄 License
 
@@ -527,15 +238,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Built with [Claude Code](https://claude.com/claude-code)** - This entire project, from architecture to implementation, was created using Anthropic's AI-powered development environment.
-- **[Tailwind CSS](https://tailwindcss.com/)** - For beautiful, utility-first styling
-- **[Handlebars](https://handlebarsjs.com/)** - For powerful templating
-- **[js-yaml](https://github.com/nodeca/js-yaml)** - For YAML parsing
-- **[Ajv](https://ajv.js.org/)** - For JSON Schema validation
+- **Built with [Claude Code](https://claude.com/claude-code)** - This entire project was created using Anthropic's AI-powered development environment
+- **[Tailwind CSS](https://tailwindcss.com/)** - Beautiful, utility-first styling
+- **[Handlebars](https://handlebarsjs.com/)** - Powerful templating
+- **[js-yaml](https://github.com/nodeca/js-yaml)** - YAML parsing
+- **[Ajv](https://ajv.js.org/)** - JSON Schema validation
 
 ## 📞 Support
 
-For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/JasonBenett/resume-crafter).
+- **Documentation**: See [docs/](docs/) directory
+- **Issues**: Report on [GitHub Issues](https://github.com/JasonBenett/resume-crafter/issues)
+- **Examples**: Check [examples/](examples/) directory
 
 ---
 
