@@ -22,6 +22,17 @@ module.exports = {
           description:
             'Default language code (e.g., "en"). If set, this language will be at the root instead of a language selector.',
         },
+        languages: {
+          type: 'array',
+          items: {
+            type: 'string',
+            pattern: '^[a-z]{2}$',
+          },
+          minItems: 1,
+          uniqueItems: true,
+          description:
+            'List of languages to build (e.g., ["en", "fr"]). If not specified, all available theme languages are built.',
+        },
       },
       additionalProperties: false,
       description: 'Site-wide configuration options',

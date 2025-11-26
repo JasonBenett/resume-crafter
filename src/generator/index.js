@@ -100,14 +100,32 @@ async function buildResume({
 
     // Determine available languages
     const configDir = path.dirname(configPath);
-    const availableLanguages = await getAllAvailableLanguages(
+    const themeLanguages = await getAllAvailableLanguages(
       theme.path,
       configDir
     );
 
-    console.log(
-      `✓ Found ${availableLanguages.length} language(s): ${availableLanguages.join(', ')}`
-    );
+    // Use configured languages or all available languages
+    const availableLanguages = config.site?.languages || themeLanguages;
+
+    // Validate that configured languages are available
+    if (config.site?.languages) {
+      const unavailable = config.site.languages.filter(
+        (lang) => !themeLanguages.includes(lang)
+      );
+      if (unavailable.length > 0) {
+        throw new Error(
+          `Configured language(s) not available in theme: ${unavailable.join(', ')}. Available: ${themeLanguages.join(', ')}`
+        );
+      }
+      console.log(
+        `✓ Using configured languages: ${availableLanguages.join(', ')}`
+      );
+    } else {
+      console.log(
+        `✓ Found ${availableLanguages.length} language(s): ${availableLanguages.join(', ')}`
+      );
+    }
 
     // Get default language from config (if specified)
     const defaultLanguage = config.site?.defaultLanguage;

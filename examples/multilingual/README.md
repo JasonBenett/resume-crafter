@@ -64,16 +64,25 @@ This generates:
 - `/es/index.html` - Spanish version
 - Language switcher in header for easy navigation
 
-### 3. Default Language Configuration
+### 3. Language Configuration
 
-The `site.defaultLanguage` setting places one language at the root:
+Control which languages to build and where to place them:
 
 ```yaml
 site:
-  defaultLanguage: en
+  languages: [en, fr, es]  # Only build these languages (optional)
+  defaultLanguage: en      # Place English at root (optional)
 ```
 
-Without this setting, the root shows a language selector page.
+**`languages`**:
+- Specifies which languages to build
+- If omitted, builds all available theme languages
+- Must be valid theme-supported languages
+
+**`defaultLanguage`**:
+- Places specified language at root URL
+- If omitted, root shows a language selector page
+- Must be included in `languages` array if both are specified
 
 ## Building Options
 

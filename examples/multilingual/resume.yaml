@@ -1,5 +1,6 @@
 site:
-  defaultLanguage: en # if not given, it will generate a language switcher component at root
+  languages: [en, fr, es]  # List of languages to build (if omitted, builds all available theme languages)
+  defaultLanguage: en      # Language at root (if omitted, generates language selector at root)
 
 profile:
   name: María García

@@ -168,13 +168,14 @@ node src/cli.js build
 # - /es/index.html (Spanish)
 ```
 
-### Default Language Configuration
+### Language Configuration
 
-Set a default language to place it at the root URL:
+Control which languages to build and set a default:
 
 ```yaml
 site:
-  defaultLanguage: en  # English at root
+  languages: [en, fr]      # Only build English and French
+  defaultLanguage: en      # English at root
 
 profile:
   name: John Doe
@@ -187,8 +188,11 @@ node src/cli.js build
 # Generates:
 # - /index.html (English - default)
 # - /fr/index.html (French)
-# - /es/index.html (Spanish)
+# Note: Spanish not built because not in languages array
 ```
+
+**Without `languages` configured:** Builds all available theme languages
+**Without `defaultLanguage` configured:** Shows language selector at root
 
 ### Single Language Build
 
@@ -286,9 +290,14 @@ introduction:
 
 ```yaml
 site:
-  defaultLanguage: string  # 2-letter language code (e.g., "en", "fr", "es")
-                           # If set, this language will be at root (/) instead of a language selector
-                           # Other languages will be in subdirectories (e.g., /fr/, /es/)
+  languages: array of strings     # List of languages to build (e.g., ["en", "fr", "es"])
+                                  # If not specified, builds all available theme languages
+                                  # Must be valid theme-supported language codes
+
+  defaultLanguage: string         # 2-letter language code (e.g., "en", "fr", "es")
+                                  # If set, this language will be at root (/) instead of a language selector
+                                  # Other languages will be in subdirectories (e.g., /fr/, /es/)
+                                  # Must be included in the languages array if both are specified
 ```
 
 ### Profile Section
