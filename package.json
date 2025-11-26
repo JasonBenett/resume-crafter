@@ -1,10 +1,18 @@
 {
   "name": "resume-crafter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A static website generator for creating professional resume websites from JSON configuration files",
+  "main": "src/index.js",
+  "bin": {
+    "resume-crafter": "./src/cli.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node src/cli.js build",
+    "dev": "chokidar 'src/**/*.js' 'themes/**/*' -c 'npm run build'",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.js\" \"themes/**/*.{html,css,js}\"",
+    "format:check": "prettier --check \"src/**/*.js\" \"themes/**/*.{html,css,js}\"",
+    "test": "echo \"Tests will be added in Phase 8\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -17,5 +25,21 @@
   "bugs": {
     "url": "https://github.com/JasonBenett/resume-crafter/issues"
   },
-  "homepage": "https://github.com/JasonBenett/resume-crafter#readme"
+  "homepage": "https://github.com/JasonBenett/resume-crafter#readme",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "ajv": "^8.17.1",
+    "autoprefixer": "^10.4.22",
+    "commander": "^14.0.2",
+    "handlebars": "^4.7.8",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "fs-extra": "^11.3.2",
+    "prettier": "^3.6.2"
+  }
 }

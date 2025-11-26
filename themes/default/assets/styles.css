@@ -1,0 +1,34 @@
+@import 'tailwindcss';
+
+/* Custom base styles */
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #111827;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+/* Print styles for resumes */
+@media print {
+  body {
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
