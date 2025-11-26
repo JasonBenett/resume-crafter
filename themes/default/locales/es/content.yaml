@@ -1,0 +1,32 @@
+# Spanish UI translations for Default theme / Traducciones UI en español para el tema predeterminado
+
+sections:
+  experience: Experiencia
+  education: Educación
+  skills: Habilidades
+  languages: Idiomas
+  hobbies: Aficiones e Intereses
+  social: Conéctate Conmigo
+
+labels:
+  present: Presente
+  location: Ubicación
+  duration: Duración
+  email: Correo
+  phone: Teléfono
+  website: Sitio web
+  downloadPdf: Descargar PDF
+
+months:
+  - Enero
+  - Febrero
+  - Marzo
+  - Abril
+  - Mayo
+  - Junio
+  - Julio
+  - Agosto
+  - Septiembre
+  - Octubre
+  - Noviembre
+  - Diciembre

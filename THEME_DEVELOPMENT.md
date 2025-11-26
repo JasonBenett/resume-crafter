@@ -21,6 +21,11 @@ Each theme is a directory in `themes/` with the following structure:
 themes/
   your-theme-name/
     theme.json              # Theme metadata and configuration
+    locales/                # UI translations for your theme
+      en/
+        content.yaml        # English UI labels
+      fr/
+        content.yaml        # French UI labels
     templates/
       index.hbs             # Main template
       header.hbs            # Partial templates
@@ -33,6 +38,65 @@ themes/
     assets/
       styles.css            # Theme styles (Tailwind CSS)
 ```
+
+## Theme Locales
+
+Themes should provide their own UI translations for all supported languages. These translations are used for section headings, labels, and other UI text.
+
+### Locale Structure
+
+Create a `locales/` directory in your theme with subdirectories for each supported language:
+
+```
+themes/your-theme-name/locales/
+  en/content.yaml
+  fr/content.yaml
+  es/content.yaml
+```
+
+### Example Locale File (en/content.yaml)
+
+```yaml
+sections:
+  experience: Experience
+  education: Education
+  skills: Skills
+  languages: Languages
+  hobbies: Hobbies & Interests
+  social: Connect With Me
+
+labels:
+  present: Present
+  location: Location
+  duration: Duration
+  email: Email
+  phone: Phone
+  website: Website
+  downloadPdf: Download PDF
+
+months:
+  - January
+  - February
+  - March
+  - April
+  - May
+  - June
+  - July
+  - August
+  - September
+  - October
+  - November
+  - December
+```
+
+### User Overrides
+
+Users can optionally override specific translation keys in their own config's `locales/` directory. The merge priority is: **Theme defaults → User overrides**
+
+This separation of concerns means:
+- Themes control all UI labels
+- Users only provide overrides if they want custom labels
+- Users don't need to translate standard UI elements
 
 ## Theme Configuration
 

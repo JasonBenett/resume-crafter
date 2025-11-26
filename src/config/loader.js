@@ -5,10 +5,12 @@ const path = require('path');
 /**
  * Load and parse a YAML configuration file
  * @param {string} filePath - Path to the YAML file
- * @returns {Promise<Object>} Parsed configuration object
+ * @param {Object} options - Loading options
+ * @param {boolean} options.optional - If true, return null instead of throwing when file not found
+ * @returns {Promise<Object|null>} Parsed configuration object or null if optional and not found
  * @throws {Error} If file cannot be read or YAML is invalid
  */
-async function loadYamlFile(filePath) {
+async function loadYamlFile(filePath, options = {}) {
   try {
     const fileContent = await fs.readFile(filePath, 'utf8');
     const config = yaml.load(fileContent);
@@ -20,6 +22,9 @@ async function loadYamlFile(filePath) {
     return config;
   } catch (error) {
     if (error.code === 'ENOENT') {
+      if (options.optional) {
+        return null;
+      }
       throw new Error(`Configuration file not found: ${filePath}`);
     }
 

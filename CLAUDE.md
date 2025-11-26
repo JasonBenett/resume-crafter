@@ -12,16 +12,6 @@ Key features:
 - **Config-driven**: All content stored in JSON files (no database)
 - **Static output**: Generates ready-to-deploy static HTML/CSS
 
-## Project Documentation
-
-- `requirements/MVP_TASKS.md` - Detailed MVP task list (kept up-to-date with progress)
-  - **Phase 1: Project Foundation & Setup** ✅ Complete
-  - **Phase 2: Configuration System** ✅ Complete
-  - **Phase 3: Theme System Architecture** ✅ Complete
-  - **Phase 4: Static Site Generator Engine** ✅ Mostly Complete
-  - **Phase 5: Default Theme Implementation** ✅ Complete
-  - Phase 6-9: Partially complete/In progress
-
 ## Tech Stack
 
 - Node.js (runtime and build tooling)
@@ -63,9 +53,6 @@ The system supports these resume content types via config files:
 
 ### Directory Structure
 
-- `requirements/` - Project requirements and task tracking
-  - `reqs.md` - Original requirements
-  - `MVP_TASKS.md` - Detailed MVP checklist (kept up-to-date)
 - `src/` - Core generator logic
   - `cli.js` - Command-line interface using Commander
   - `index.js` - Main module exports
@@ -107,18 +94,23 @@ The system supports these resume content types via config files:
 - Helpful error messages for validation failures
 
 **Multi-language Support (i18n):**
-- Locale files structure: `locales/{lang}/content.yaml`
-- CLI flag `--language` to specify locale
+- Themes provide default UI translations in `themes/{theme}/locales/{lang}/content.yaml`
+- Users can optionally override translations in their config's `locales/` directory
+- Merge priority: Theme defaults → User overrides
+- CLI flag `--language` to specify language
 - Graceful fallback when locale not found
-- Example English locale provided
+- Default theme supports: English (en), French (fr), Spanish (es)
 
 **Example Usage:**
 ```bash
-# Build with default English locale
-node src/cli.js build -c examples/basic/resume.yaml
+# Build with theme's English translations
+node src/cli.js build -c examples/basic/resume.yaml -l en
 
-# Build with specific locale
+# Build with theme's French translations
 node src/cli.js build -c examples/basic/resume.yaml -l fr
+
+# Build with user's custom locale overrides (if provided)
+node src/cli.js build -c examples/multilingual/resume.yaml -l fr
 ```
 
 ### Theme System (Phase 3 - Complete)
@@ -134,6 +126,10 @@ node src/cli.js build -c examples/basic/resume.yaml -l fr
 themes/
   default/
     theme.json           # Theme metadata and configuration
+    locales/             # Theme UI translations
+      en/content.yaml    # English UI labels
+      fr/content.yaml    # French UI labels
+      es/content.yaml    # Spanish UI labels
     templates/
       index.hbs          # Main template
       header.hbs         # Header partial
@@ -163,10 +159,10 @@ themes/
 ### Build Pipeline
 
 1. Load and validate resume configuration (YAML)
-2. Load and merge locale translations (if available)
-3. Load and initialize theme (Handlebars templates)
+2. Load theme (Handlebars templates + theme config)
+3. Load and merge locale translations (theme defaults + user overrides)
 4. Clean output directory
-5. Generate HTML from templates + data
+5. Generate HTML from templates + data + locales
 6. Process CSS with Tailwind v4 via PostCSS
 7. Copy theme assets (images, fonts, etc.)
 8. Output ready-to-deploy static site

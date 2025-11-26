@@ -7,7 +7,7 @@ const {
   copyDir,
 } = require('../utils/fileHandler');
 const { loadAndValidateConfig } = require('../config');
-const { loadLocale, mergeConfigWithLocale } = require('../config/i18n');
+const { loadAndMergeLocales, mergeConfigWithLocale } = require('../config/i18n');
 const { loadTheme, generateHTML } = require('../themes');
 
 /**
@@ -26,24 +26,25 @@ async function buildResume({ configPath, themeName, outputPath, language }) {
     let config = await loadAndValidateConfig(configPath);
     console.log('✓ Configuration validated successfully');
 
-    // Load locale if available
+    // Load theme first (needed for theme locales)
+    console.log(`Loading theme: ${themeName}`);
+    const theme = await loadTheme(themeName);
+    console.log(`✓ Theme loaded: ${theme.config.name}`);
+
+    // Load and merge locales (theme defaults + user overrides)
     const configDir = path.dirname(configPath);
-    try {
-      const locale = await loadLocale(configDir, language);
+    const locale = await loadAndMergeLocales(theme.path, configDir, language);
+
+    if (locale) {
       config = mergeConfigWithLocale(config, locale);
       console.log(`✓ Loaded locale: ${language}`);
-    } catch {
+    } else {
       console.log(
         `ℹ No locale found for "${language}", continuing without translations`
       );
     }
 
     console.log(`✓ Loaded profile for: ${config.profile.name}`);
-
-    // Load theme
-    console.log(`Loading theme: ${themeName}`);
-    const theme = await loadTheme(themeName);
-    console.log(`✓ Theme loaded: ${theme.config.name}`);
 
     console.log(`Output directory: ${outputPath}`);
 

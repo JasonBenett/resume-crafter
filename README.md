@@ -8,7 +8,7 @@ A modern, flexible static website generator for creating beautiful, professional
 
 - **📝 YAML Configuration** - Write your resume in human-friendly YAML format
 - **🎨 Theme System** - Fully customizable themes with Handlebars templates
-- **🌍 Multi-language Support** - Built-in i18n with locale files
+- **🌍 Multi-language Support** - Themes provide built-in UI translations (en, fr, es)
 - **📱 Responsive Design** - Mobile-friendly and print-ready layouts
 - **✅ Schema Validation** - Comprehensive validation ensures data integrity
 - **🚀 Zero Database** - Pure static site generation
@@ -151,37 +151,42 @@ themes/
 
 ## 🌍 Multi-language Support
 
-Add translations by creating locale files in your resumes directory:
+Themes provide default UI translations (section headings, labels, etc.) for all supported languages. You can optionally override specific translations by creating locale files:
 
 ```
 resumes/
   resume.yaml           # Your resume data
-  locales/
+  locales/              # Optional: override theme translations
     en/
-      content.yaml      # English translations
+      content.yaml      # Custom English labels
     fr/
-      content.yaml      # French translations
+      content.yaml      # Custom French labels
 ```
 
-**Locale file example (locales/en/content.yaml):**
+**Example: Customizing section headings (locales/en/content.yaml):**
 
 ```yaml
 sections:
-  experience: Experience
-  education: Education
-  skills: Skills
-  languages: Languages
-
-labels:
-  present: Present
-  location: Location
+  experience: Work History    # Override default "Experience"
+  education: Academic Background
 ```
 
-**Build with locale:**
+**Build with different languages:**
 
 ```bash
+# Use theme's English translations
+node src/cli.js build -l en
+
+# Use theme's French translations
 node src/cli.js build -l fr
+
+# Use theme's Spanish translations with your custom overrides
+node src/cli.js build -l es
 ```
+
+**Default theme supports:** English (en), French (fr), Spanish (es)
+
+For complete locale structure, see `themes/default/locales/` or [Theme Development Guide](THEME_DEVELOPMENT.md#theme-locales).
 
 ## 📋 Configuration Reference
 

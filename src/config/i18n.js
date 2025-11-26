@@ -4,38 +4,85 @@ const { loadYamlFile } = require('./loader');
 /**
  * I18n structure for multi-language support
  *
- * Expected directory structure:
- * resume.yaml (main config, language-agnostic data)
+ * Theme provides default UI translations:
+ * themes/default/locales/
+ *   en/content.yaml (Default English UI labels)
+ *   fr/content.yaml (Default French UI labels)
+ *
+ * User can optionally override specific translations:
+ * resume.yaml (main config)
  * locales/
- *   en/
- *     content.yaml (English translations)
- *   fr/
- *     content.yaml (French translations)
- *   es/
- *     content.yaml (Spanish translations)
+ *   en/content.yaml (Optional user overrides for English)
  *
- * The content.yaml files contain translatable strings like:
- * - Section headings (Experience, Education, etc.)
- * - UI labels
- * - Any text that should be localized
+ * Merge priority: Theme defaults → User overrides
  *
- * The main resume.yaml contains the actual content data
+ * This separates concerns:
+ * - Theme controls UI labels (sections, buttons, etc.)
+ * - User only overrides if custom labels are needed
  */
 
 /**
- * Load locale/translation file for a specific language
+ * Load locale/translation file for a specific language from a single source
  * @param {string} basePath - Base directory containing locales folder
  * @param {string} language - Language code (e.g., 'en', 'fr', 'es')
- * @returns {Promise<Object>} Translation strings
+ * @returns {Promise<Object|null>} Translation strings or null if not found
  */
 async function loadLocale(basePath, language) {
   const localePath = path.join(basePath, 'locales', language, 'content.yaml');
+  return await loadYamlFile(localePath, { optional: true });
+}
 
-  try {
-    return await loadYamlFile(localePath);
-  } catch (error) {
-    throw new Error(`Failed to load locale "${language}": ${error.message}`);
+/**
+ * Deep merge two objects, with source overriding target
+ * @param {Object} target - Base object
+ * @param {Object} source - Override object
+ * @returns {Object} Merged object
+ */
+function deepMerge(target, source) {
+  const result = { ...target };
+
+  for (const key in source) {
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      result[key] = deepMerge(result[key] || {}, source[key]);
+    } else {
+      result[key] = source[key];
+    }
   }
+
+  return result;
+}
+
+/**
+ * Load and merge theme locale with optional user overrides
+ * @param {string} themePath - Path to theme directory
+ * @param {string} userConfigPath - Path to user config directory
+ * @param {string} language - Language code (e.g., 'en', 'fr', 'es')
+ * @returns {Promise<Object>} Merged translations (theme defaults + user overrides)
+ */
+async function loadAndMergeLocales(themePath, userConfigPath, language) {
+  // Load theme's default UI translations
+  const themeLocale = await loadLocale(themePath, language);
+
+  // Load user's optional overrides
+  const userLocale = await loadLocale(userConfigPath, language);
+
+  // If no theme locale and no user locale, return empty object
+  if (!themeLocale && !userLocale) {
+    return null;
+  }
+
+  // If only theme locale, return it
+  if (themeLocale && !userLocale) {
+    return themeLocale;
+  }
+
+  // If only user locale (unlikely but possible), return it
+  if (!themeLocale && userLocale) {
+    return userLocale;
+  }
+
+  // Merge: theme defaults + user overrides
+  return deepMerge(themeLocale, userLocale);
 }
 
 /**
@@ -75,6 +122,7 @@ function mergeConfigWithLocale(config, locale) {
 
 module.exports = {
   loadLocale,
+  loadAndMergeLocales,
   getAvailableLanguages,
   mergeConfigWithLocale,
 };
