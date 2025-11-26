@@ -4,9 +4,9 @@ const path = require('path');
 const fs = require('fs-extra');
 const { buildResume } = require('../../src/generator');
 
-const testOutputDir = path.join(__dirname, '../tmp/test-output');
-
 describe('Build Integration Tests', () => {
+  const testOutputDir = path.join(__dirname, '../tmp/test-output');
+
   before(async () => {
     // Clean up test output directory before tests
     await fs.remove(testOutputDir);
