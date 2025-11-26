@@ -1,6 +1,8 @@
 /**
  * JSON Schema for education/diploma entries
  */
+const { translatableString } = require('./common');
+
 module.exports = {
   type: 'array',
   items: {
@@ -12,13 +14,28 @@ module.exports = {
         description: 'School, university, or institution name',
       },
       degree: {
-        type: 'string',
-        minLength: 1,
-        description: 'Degree, diploma, or certification title',
+        oneOf: [
+          {
+            type: 'string',
+            minLength: 1,
+          },
+          {
+            type: 'object',
+            patternProperties: {
+              '^[a-z]{2}$': {
+                type: 'string',
+                minLength: 1,
+              },
+            },
+            additionalProperties: false,
+            minProperties: 1,
+          },
+        ],
+        description: 'Degree, diploma, or certification title (translatable)',
       },
       field: {
-        type: 'string',
-        description: 'Field of study or major',
+        ...translatableString,
+        description: 'Field of study or major (translatable)',
       },
       location: {
         type: 'string',
@@ -40,12 +57,12 @@ module.exports = {
         description: 'Grade point average or final grade',
       },
       honors: {
-        type: 'string',
-        description: 'Honors, awards, or distinctions',
+        ...translatableString,
+        description: 'Honors, awards, or distinctions (translatable)',
       },
       description: {
-        type: 'string',
-        description: 'Additional details about the education',
+        ...translatableString,
+        description: 'Additional details about the education (translatable)',
       },
     },
     required: ['institution', 'degree'],

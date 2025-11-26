@@ -7,19 +7,34 @@ profile:
   phone: +34 612 345 678
   city: Madrid
   country: Spain
-  introduction: Experienced software engineer with a passion for building scalable web applications and mentoring junior developers.
+  introduction:
+    en: Experienced software engineer with a passion for building scalable web applications and mentoring junior developers.
+    fr: Ingénieure logicielle expérimentée passionnée par le développement d'applications web évolutives et le mentorat de développeurs juniors.
+    es: Ingeniera de software experimentada con pasión por crear aplicaciones web escalables y mentoría de desarrolladores junior.
 
 experience:
   - company: Tech Solutions S.L.
-    position: Senior Full-Stack Developer
+    position:
+      en: Senior Full-Stack Developer
+      fr: Développeuse Full-Stack Senior
+      es: Desarrolladora Full-Stack Senior
     location: Madrid, Spain
     startDate: '2020-01'
     endDate: present
-    description: Leading development of microservices architecture for enterprise clients.
+    description:
+      en: Leading development of microservices architecture for enterprise clients.
+      fr: Direction du développement d'architecture de microservices pour les clients d'entreprise.
+      es: Liderando el desarrollo de arquitectura de microservicios para clientes empresariales.
     tasks:
-      - Architected and implemented RESTful APIs serving 1M+ daily requests
-      - Mentored team of 4 junior developers
-      - Reduced deployment time by 60% through CI/CD pipeline improvements
+      - en: Architected and implemented RESTful APIs serving 1M+ daily requests
+        fr: Conception et implémentation d'APIs RESTful traitant plus d'1M de requêtes quotidiennes
+        es: Diseñé e implementé APIs RESTful que sirven más de 1M de solicitudes diarias
+      - en: Mentored team of 4 junior developers
+        fr: Mentorat d'une équipe de 4 développeurs juniors
+        es: Mentoría de un equipo de 4 desarrolladores junior
+      - en: Reduced deployment time by 60% through CI/CD pipeline improvements
+        fr: Réduction du temps de déploiement de 60% grâce aux améliorations du pipeline CI/CD
+        es: Reducción del tiempo de despliegue en un 60% mediante mejoras en el pipeline CI/CD
     technologies:
       - Node.js
       - React
@@ -29,20 +44,32 @@ experience:
 
 education:
   - institution: Universidad Politécnica de Madrid
-    degree: Master's Degree
-    field: Computer Science
+    degree:
+      en: Master's Degree
+      fr: Master
+      es: Máster
+    field:
+      en: Computer Science
+      fr: Informatique
+      es: Ciencias de la Computación
     location: Madrid, Spain
     startDate: '2016'
     endDate: '2018'
     gpa: '3.8/4.0'
 
 skills:
-  - category: Programming Languages
+  - category:
+      en: Programming Languages
+      fr: Langages de Programmation
+      es: Lenguajes de Programación
     items:
       - JavaScript/TypeScript
       - Python
       - Go
-  - category: Frameworks & Tools
+  - category:
+      en: Frameworks & Tools
+      fr: Frameworks & Outils
+      es: Frameworks y Herramientas
     items:
       - React
       - Node.js
@@ -51,17 +78,32 @@ skills:
       - MongoDB
 
 languages:
-  - language: Spanish
+  - language:
+      en: Spanish
+      fr: Espagnol
+      es: Español
     proficiency: native
-  - language: English
+  - language:
+      en: English
+      fr: Anglais
+      es: Inglés
     proficiency: fluent
-  - language: French
+  - language:
+      en: French
+      fr: Français
+      es: Francés
     proficiency: intermediate
 
 hobbies:
-  - Hiking
-  - Photography
-  - Open source contributions
+  - en: Hiking
+    fr: Randonnée
+    es: Senderismo
+  - en: Photography
+    fr: Photographie
+    es: Fotografía
+  - en: Open source contributions
+    fr: Contributions open source
+    es: Contribuciones de código abierto
 
 social:
   - platform: GitHub

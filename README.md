@@ -202,6 +202,47 @@ node src/cli.js build -l fr
 node src/cli.js build --single-language
 ```
 
+### Inline Content Translation
+
+Resume Crafter supports inline content translation, allowing you to provide language-specific versions of your resume content:
+
+**Example with translated content:**
+
+```yaml
+profile:
+  introduction:
+    en: Experienced software engineer with a passion for building scalable applications.
+    fr: Ingénieure logicielle expérimentée passionnée par le développement d'applications évolutives.
+    es: Ingeniera de software experimentada con pasión por crear aplicaciones escalables.
+
+experience:
+  - company: Tech Corp
+    position:
+      en: Senior Developer
+      fr: Développeuse Senior
+      es: Desarrolladora Senior
+    tasks:
+      - en: Led team of 5 developers
+        fr: Direction d'une équipe de 5 développeurs
+        es: Lideré un equipo de 5 desarrolladores
+```
+
+**How it works:**
+- Any text field can be either a string or an object with language codes as keys
+- During build, each language version resolves to the appropriate translation
+- Falls back to English if target language not found
+- Falls back to first available language if neither target nor English exist
+
+**Translatable fields:**
+- Profile: `introduction`, `address`
+- Experience: `position`, `description`, `tasks` (array items)
+- Education: `degree`, `field`, `honors`, `description`
+- Skills: `category`, `items` (array items)
+- Languages: `language` (name)
+- Hobbies: array items
+
+See `examples/multilingual/resume.yaml` for a complete example.
+
 ### Custom UI Labels (Optional)
 
 Themes provide default UI translations. Override specific labels if needed:
@@ -228,6 +269,19 @@ For complete locale structure, see `themes/default/locales/` or [Theme Developme
 
 ## 📋 Configuration Reference
 
+**Note:** Most text fields support inline translation. You can use either a simple string or an object with language codes:
+
+```yaml
+# Simple string
+introduction: "Software engineer with 5 years of experience"
+
+# Or multi-language object
+introduction:
+  en: "Software engineer with 5 years of experience"
+  fr: "Ingénieur logiciel avec 5 ans d'expérience"
+  es: "Ingeniero de software con 5 años de experiencia"
+```
+
 ### Site Configuration (Optional)
 
 ```yaml
@@ -246,9 +300,9 @@ profile:
   phone: string
   city: string
   country: string
-  address: string
+  address: string | translatable
   website: string (URL)
-  introduction: string
+  introduction: string | translatable
   photo: string (path or URL)
 ```
 
@@ -257,12 +311,12 @@ profile:
 ```yaml
 experience:
   - company: string (required)
-    position: string (required)
+    position: string | translatable (required)
     location: string
     startDate: string (YYYY-MM format, required)
     endDate: string or null ("present" or YYYY-MM)
-    description: string
-    tasks: array of strings
+    description: string | translatable
+    tasks: array of (string | translatable)
     technologies: array of strings
 ```
 
@@ -271,36 +325,36 @@ experience:
 ```yaml
 education:
   - institution: string (required)
-    degree: string (required)
-    field: string
+    degree: string | translatable (required)
+    field: string | translatable
     location: string
     startDate: string (YYYY or YYYY-MM)
     endDate: string or null
     gpa: string or number
-    honors: string
-    description: string
+    honors: string | translatable
+    description: string | translatable
 ```
 
 ### Skills Section
 
 ```yaml
 skills:
-  - category: string
-    items: array of strings
+  - category: string | translatable
+    items: array of (string | translatable)
 ```
 
 ### Languages Section
 
 ```yaml
 languages:
-  - language: string
+  - language: string | translatable
     proficiency: enum (native|fluent|advanced|intermediate|basic)
 ```
 
 ### Other Sections
 
 ```yaml
-hobbies: array of strings
+hobbies: array of (string | translatable)
 
 social:
   - platform: string

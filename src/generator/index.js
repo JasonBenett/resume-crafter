@@ -12,6 +12,7 @@ const {
   getAllAvailableLanguages,
   mergeConfigWithLocale,
 } = require('../config/i18n');
+const { translateConfig } = require('../config/translator');
 const { loadTheme, generateHTML } = require('../themes');
 
 /**
@@ -37,12 +38,15 @@ async function buildSingleLanguage({
   availableLanguages = [],
   isDefaultLanguage = false,
 }) {
+  // Translate content fields to target language
+  const translatedConfig = translateConfig(config, language);
+
   // Load and merge locales (theme defaults + user overrides)
   const locale = await loadAndMergeLocales(theme.path, configDir, language);
 
-  let localizedConfig = config;
+  let localizedConfig = translatedConfig;
   if (locale) {
-    localizedConfig = mergeConfigWithLocale(config, locale);
+    localizedConfig = mergeConfigWithLocale(translatedConfig, locale);
   }
 
   // Add language metadata for templates
@@ -101,7 +105,9 @@ async function buildResume({
       configDir
     );
 
-    console.log(`✓ Found ${availableLanguages.length} language(s): ${availableLanguages.join(', ')}`);
+    console.log(
+      `✓ Found ${availableLanguages.length} language(s): ${availableLanguages.join(', ')}`
+    );
 
     // Get default language from config (if specified)
     const defaultLanguage = config.site?.defaultLanguage;
@@ -124,7 +130,9 @@ async function buildResume({
 
     if (shouldBuildMulti) {
       // Multi-language build
-      console.log(`Building multi-language site (${availableLanguages.join(', ')})...`);
+      console.log(
+        `Building multi-language site (${availableLanguages.join(', ')})...`
+      );
 
       if (defaultLanguage) {
         console.log(`Default language: ${defaultLanguage} (will be at root)`);
@@ -133,7 +141,9 @@ async function buildResume({
       // Build a page for each language
       for (const lang of availableLanguages) {
         const isDefault = lang === defaultLanguage;
-        const langOutputPath = isDefault ? outputPath : path.join(outputPath, lang);
+        const langOutputPath = isDefault
+          ? outputPath
+          : path.join(outputPath, lang);
 
         if (!isDefault) {
           console.log(`\nGenerating ${lang} version...`);
@@ -233,11 +243,7 @@ async function buildResume({
  * @param {string[]} options.availableLanguages - Available language codes
  * @param {string} options.defaultLanguage - Default/fallback language
  */
-async function generateLanguageSelector({
-  outputPath,
-  availableLanguages,
-  defaultLanguage,
-}) {
+async function generateLanguageSelector({ outputPath, availableLanguages }) {
   const languageNames = {
     en: 'English',
     fr: 'Français',

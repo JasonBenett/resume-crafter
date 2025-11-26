@@ -2,6 +2,7 @@
  * Master JSON Schema for resume configuration
  * Combines all individual schemas
  */
+const { translatableString, translatableStringArray } = require('./common');
 const profileSchema = require('./profile.schema');
 const experienceSchema = require('./experience.schema');
 const educationSchema = require('./education.schema');
@@ -51,15 +52,13 @@ module.exports = {
         type: 'object',
         properties: {
           category: {
-            type: 'string',
-            description: 'Skill category (e.g., Programming, Languages)',
+            ...translatableString,
+            description:
+              'Skill category (e.g., Programming, Languages) (translatable)',
           },
           items: {
-            type: 'array',
-            items: {
-              type: 'string',
-            },
-            description: 'List of skills in this category',
+            ...translatableStringArray,
+            description: 'List of skills in this category (translatable)',
           },
         },
         required: ['category', 'items'],
@@ -73,9 +72,24 @@ module.exports = {
         type: 'object',
         properties: {
           language: {
-            type: 'string',
-            minLength: 1,
-            description: 'Language name',
+            oneOf: [
+              {
+                type: 'string',
+                minLength: 1,
+              },
+              {
+                type: 'object',
+                patternProperties: {
+                  '^[a-z]{2}$': {
+                    type: 'string',
+                    minLength: 1,
+                  },
+                },
+                additionalProperties: false,
+                minProperties: 1,
+              },
+            ],
+            description: 'Language name (translatable)',
           },
           proficiency: {
             type: 'string',

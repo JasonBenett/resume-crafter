@@ -1,6 +1,8 @@
 /**
  * JSON Schema for professional experience entries
  */
+const { translatableString, translatableStringArray } = require('./common');
+
 module.exports = {
   type: 'array',
   items: {
@@ -12,9 +14,24 @@ module.exports = {
         description: 'Company name',
       },
       position: {
-        type: 'string',
-        minLength: 1,
-        description: 'Job title or position',
+        oneOf: [
+          {
+            type: 'string',
+            minLength: 1,
+          },
+          {
+            type: 'object',
+            patternProperties: {
+              '^[a-z]{2}$': {
+                type: 'string',
+                minLength: 1,
+              },
+            },
+            additionalProperties: false,
+            minProperties: 1,
+          },
+        ],
+        description: 'Job title or position (translatable)',
       },
       location: {
         type: 'string',
@@ -32,15 +49,12 @@ module.exports = {
           'End date in YYYY-MM or YYYY-MM-DD format, "present" for current job, or null',
       },
       description: {
-        type: 'string',
-        description: 'Brief description of the role',
+        ...translatableString,
+        description: 'Brief description of the role (translatable)',
       },
       tasks: {
-        type: 'array',
-        items: {
-          type: 'string',
-        },
-        description: 'List of responsibilities and achievements',
+        ...translatableStringArray,
+        description: 'List of responsibilities and achievements (translatable)',
       },
       technologies: {
         type: 'array',

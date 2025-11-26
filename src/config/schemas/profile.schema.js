@@ -1,6 +1,8 @@
 /**
  * JSON Schema for profile/personal information
  */
+const { translatableString } = require('./common');
+
 module.exports = {
   type: 'object',
   properties: {
@@ -32,12 +34,12 @@ module.exports = {
       description: 'Country of residence',
     },
     address: {
-      type: 'string',
-      description: 'Full address (optional)',
+      ...translatableString,
+      description: 'Full address (optional, translatable)',
     },
     introduction: {
-      type: 'string',
-      description: 'Brief introduction or professional summary',
+      ...translatableString,
+      description: 'Brief introduction or professional summary (translatable)',
     },
     photo: {
       type: 'string',
