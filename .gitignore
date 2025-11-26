@@ -32,7 +32,5 @@ tests/tmp
 .cache/
 
 # User resume configurations (keep folder structure, ignore content)
-resumes/*.yaml
-resumes/*.yml
-resumes/locales/
+resumes/*
 !resumes/README.md

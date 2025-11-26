@@ -60,6 +60,14 @@ async function buildSingleLanguage({
   localizedConfig.cssPath = isInSubdirectory ? '../styles.css' : 'styles.css';
   localizedConfig.assetsPath = isInSubdirectory ? '../assets' : 'assets';
 
+  // Adjust photo path for subdirectories
+  if (localizedConfig.profile?.photo) {
+    const photoFilename = path.basename(localizedConfig.profile.photo);
+    localizedConfig.profile.photo = isInSubdirectory
+      ? `../${photoFilename}`
+      : photoFilename;
+  }
+
   // Generate HTML from theme and config
   const html = generateHTML(theme, localizedConfig);
   const htmlOutput = path.join(outputPath, filename);
@@ -246,6 +254,25 @@ async function buildResume({
       console.log('✓ Assets copied');
     } catch {
       console.log('ℹ No additional assets to copy');
+    }
+
+    // Copy user photo if specified
+    if (config.profile?.photo) {
+      try {
+        const fs = require('fs').promises;
+        const photoSrc = path.join(configDir, config.profile.photo);
+        const photoFilename = path.basename(config.profile.photo);
+        const photoDest = path.join(outputPath, photoFilename);
+
+        // Check if source file exists
+        await fs.access(photoSrc);
+        await fs.copyFile(photoSrc, photoDest);
+        console.log(`✓ Profile photo copied: ${photoFilename}`);
+      } catch (error) {
+        console.log(
+          `⚠ Warning: Could not copy profile photo "${config.profile.photo}": ${error.message}`
+        );
+      }
     }
 
     console.log('\n✅ Build completed successfully!');

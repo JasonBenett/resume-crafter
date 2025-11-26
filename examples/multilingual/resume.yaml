@@ -8,6 +8,7 @@ profile:
   phone: +34 612 345 678
   city: Madrid
   country: Spain
+  photo: avatar.jpg
   introduction:
     en: Experienced software engineer with a passion for building scalable web applications and mentoring junior developers.
     fr: Ingénieure logicielle expérimentée passionnée par le développement d'applications web évolutives et le mentorat de développeurs juniors.
