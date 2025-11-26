@@ -1,120 +1,72 @@
-# Multilingual Resume Configuration Example
-# This configuration works with English, French, and Spanish locales
-# Build with: node src/cli.js build -c examples/multilingual/resume.yaml -l [en|fr|es]
+site:
+  defaultLanguage: en # if not given, it will generate a language switcher component at root
 
 profile:
   name: María García
   email: maria.garcia@example.com
-  phone: "+34 123 456 789"
+  phone: +34 612 345 678
   city: Madrid
   country: Spain
-  website: https://mariagarcia.dev
-  introduction: |
-    Experienced full-stack developer passionate about creating elegant solutions
-    to complex problems. Specialized in modern web technologies and cloud infrastructure.
+  introduction: Experienced software engineer with a passion for building scalable web applications and mentoring junior developers.
 
 experience:
-  - company: Global Tech Solutions
-    position: Senior Full Stack Developer
+  - company: Tech Solutions S.L.
+    position: Senior Full-Stack Developer
     location: Madrid, Spain
-    startDate: "2021-03"
+    startDate: '2020-01'
     endDate: present
-    description: Leading development of cloud-based enterprise applications
+    description: Leading development of microservices architecture for enterprise clients.
     tasks:
-      - Architected and implemented microservices infrastructure
+      - Architected and implemented RESTful APIs serving 1M+ daily requests
       - Mentored team of 4 junior developers
-      - Improved application performance by 60%
+      - Reduced deployment time by 60% through CI/CD pipeline improvements
     technologies:
-      - React
       - Node.js
-      - AWS
-      - Docker
-
-  - company: Startup Innovate
-    position: Full Stack Developer
-    location: Barcelona, Spain
-    startDate: "2019-01"
-    endDate: "2021-02"
-    description: Core team member building innovative web applications
-    tasks:
-      - Developed responsive single-page applications
-      - Implemented RESTful APIs and database schemas
-      - Collaborated with designers on UX improvements
-    technologies:
-      - Vue.js
-      - Python
+      - React
       - PostgreSQL
+      - Docker
+      - Kubernetes
 
 education:
   - institution: Universidad Politécnica de Madrid
     degree: Master's Degree
     field: Computer Science
     location: Madrid, Spain
-    startDate: "2016"
-    endDate: "2018"
-    honors: Distinction
-
-  - institution: Universidad Complutense de Madrid
-    degree: Bachelor's Degree
-    field: Software Engineering
-    location: Madrid, Spain
-    startDate: "2012"
-    endDate: "2016"
-    gpa: "3.7"
+    startDate: '2016'
+    endDate: '2018'
+    gpa: '3.8/4.0'
 
 skills:
-  - category: Frontend Development
+  - category: Programming Languages
+    items:
+      - JavaScript/TypeScript
+      - Python
+      - Go
+  - category: Frameworks & Tools
     items:
       - React
-      - Vue.js
-      - TypeScript
-      - HTML/CSS
-
-  - category: Backend Development
-    items:
       - Node.js
-      - Python
-      - Express.js
-      - Django
-
-  - category: Cloud & DevOps
-    items:
-      - AWS
-      - Docker
-      - Kubernetes
-      - CI/CD
-
-  - category: Databases
-    items:
+      - Express
       - PostgreSQL
       - MongoDB
-      - Redis
 
 languages:
   - language: Spanish
     proficiency: native
-
   - language: English
     proficiency: fluent
-
   - language: French
     proficiency: intermediate
 
 hobbies:
-  - Contributing to open source projects
-  - Learning new programming languages
-  - Rock climbing
+  - Hiking
   - Photography
+  - Open source contributions
 
 social:
   - platform: GitHub
     url: https://github.com/mariagarcia
     username: mariagarcia
-
   - platform: LinkedIn
-    url: https://linkedin.com/in/maria-garcia-dev
-    username: maria-garcia-dev
-
-  - platform: Twitter
-    url: https://twitter.com/mariagarcia_dev
-    username: "@mariagarcia_dev"
+    url: https://linkedin.com/in/maria-garcia
+    username: maria-garcia

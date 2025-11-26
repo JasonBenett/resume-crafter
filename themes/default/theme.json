@@ -8,6 +8,7 @@
     "main": "index.hbs",
     "partials": [
       "header.hbs",
+      "language-switcher.hbs",
       "experience.hbs",
       "education.hbs",
       "skills.hbs",

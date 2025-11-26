@@ -151,7 +151,60 @@ themes/
 
 ## 🌍 Multi-language Support
 
-Themes provide default UI translations (section headings, labels, etc.) for all supported languages. You can optionally override specific translations by creating locale files:
+Resume Crafter automatically builds multi-language websites with dynamic language switching.
+
+### Automatic Multi-Language Builds
+
+By default, Resume Crafter detects all available languages and generates a multi-language site:
+
+```bash
+# Build all available languages
+node src/cli.js build
+
+# Generates:
+# - /index.html (language selector)
+# - /en/index.html (English)
+# - /fr/index.html (French)
+# - /es/index.html (Spanish)
+```
+
+### Default Language Configuration
+
+Set a default language to place it at the root URL:
+
+```yaml
+site:
+  defaultLanguage: en  # English at root
+
+profile:
+  name: John Doe
+  # ...
+```
+
+```bash
+node src/cli.js build
+
+# Generates:
+# - /index.html (English - default)
+# - /fr/index.html (French)
+# - /es/index.html (Spanish)
+```
+
+### Single Language Build
+
+Build only one language:
+
+```bash
+# Build specific language
+node src/cli.js build -l fr
+
+# Force single-language build (first available)
+node src/cli.js build --single-language
+```
+
+### Custom UI Labels (Optional)
+
+Themes provide default UI translations. Override specific labels if needed:
 
 ```
 resumes/
@@ -159,11 +212,9 @@ resumes/
   locales/              # Optional: override theme translations
     en/
       content.yaml      # Custom English labels
-    fr/
-      content.yaml      # Custom French labels
 ```
 
-**Example: Customizing section headings (locales/en/content.yaml):**
+**Example override (locales/en/content.yaml):**
 
 ```yaml
 sections:
@@ -171,24 +222,20 @@ sections:
   education: Academic Background
 ```
 
-**Build with different languages:**
-
-```bash
-# Use theme's English translations
-node src/cli.js build -l en
-
-# Use theme's French translations
-node src/cli.js build -l fr
-
-# Use theme's Spanish translations with your custom overrides
-node src/cli.js build -l es
-```
-
 **Default theme supports:** English (en), French (fr), Spanish (es)
 
 For complete locale structure, see `themes/default/locales/` or [Theme Development Guide](THEME_DEVELOPMENT.md#theme-locales).
 
 ## 📋 Configuration Reference
+
+### Site Configuration (Optional)
+
+```yaml
+site:
+  defaultLanguage: string  # 2-letter language code (e.g., "en", "fr", "es")
+                           # If set, this language will be at root (/) instead of a language selector
+                           # Other languages will be in subdirectories (e.g., /fr/, /es/)
+```
 
 ### Profile Section
 

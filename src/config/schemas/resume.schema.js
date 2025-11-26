@@ -12,6 +12,19 @@ module.exports = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
   properties: {
+    site: {
+      type: 'object',
+      properties: {
+        defaultLanguage: {
+          type: 'string',
+          pattern: '^[a-z]{2}$',
+          description:
+            'Default language code (e.g., "en"). If set, this language will be at the root instead of a language selector.',
+        },
+      },
+      additionalProperties: false,
+      description: 'Site-wide configuration options',
+    },
     profile: {
       ...profileSchema,
       description: 'Personal information and contact details',

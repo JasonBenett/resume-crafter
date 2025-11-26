@@ -20,7 +20,14 @@ program
   .option('-c, --config <path>', 'Path to config file', 'resumes/resume.yaml')
   .option('-t, --theme <name>', 'Theme name to use', 'default')
   .option('-o, --output <path>', 'Output directory', './dist')
-  .option('-l, --language <code>', 'Language code (e.g., en, fr, es)', 'en')
+  .option(
+    '-l, --language <code>',
+    'Language code (e.g., en, fr, es). If omitted, builds all available languages.'
+  )
+  .option(
+    '--single-language',
+    'Force single-language build (uses first available language)'
+  )
   .action(async (options) => {
     try {
       console.log('Building resume...');
@@ -29,6 +36,7 @@ program
         themeName: options.theme,
         outputPath: path.resolve(options.output),
         language: options.language,
+        multiLanguage: options.singleLanguage ? false : undefined,
       });
       console.log('✓ Resume built successfully!');
     } catch (error) {

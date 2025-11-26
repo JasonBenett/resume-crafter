@@ -108,6 +108,24 @@ async function getAvailableLanguages(basePath) {
 }
 
 /**
+ * Get all available languages from theme and user config
+ * @param {string} themePath - Path to theme directory
+ * @param {string} userConfigPath - Path to user config directory
+ * @returns {Promise<string[]>} Array of unique language codes
+ */
+async function getAllAvailableLanguages(themePath, userConfigPath) {
+  const themeLanguages = await getAvailableLanguages(themePath);
+  const userLanguages = await getAvailableLanguages(userConfigPath);
+
+  // Combine and deduplicate languages
+  const allLanguages = [...new Set([...themeLanguages, ...userLanguages])];
+
+  // Theme languages take priority (user can only override what theme supports)
+  // But if user has additional languages, include them too
+  return allLanguages.sort();
+}
+
+/**
  * Merge config with locale data
  * @param {Object} config - Main configuration
  * @param {Object} locale - Locale translations
@@ -124,5 +142,6 @@ module.exports = {
   loadLocale,
   loadAndMergeLocales,
   getAvailableLanguages,
+  getAllAvailableLanguages,
   mergeConfigWithLocale,
 };

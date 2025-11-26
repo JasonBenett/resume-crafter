@@ -151,12 +151,12 @@ The main template defines the overall page structure:
 
 ```handlebars
 <!DOCTYPE html>
-<html lang="{{language}}">
+<html lang="{{currentLanguage}}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{profile.name}} - Resume</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{{cssPath}}">
 </head>
 <body>
   <div class="container">
@@ -341,9 +341,42 @@ Your templates have access to the following data:
       url: "string",
       username: "string"
     }
-  ],
-  language: "en" // Current language code
+  ]
 }
+```
+
+### Multi-Language Metadata
+
+When building multi-language sites, additional metadata is available:
+
+```javascript
+{
+  // Site configuration (optional)
+  site: {
+    defaultLanguage: "en"  // If set, this language is at root
+  },
+
+  // Language metadata
+  currentLanguage: "en",           // Current page language
+  availableLanguages: ["en", "fr", "es"],  // All available languages
+  isMultiLanguage: true,           // Whether site has multiple languages
+  isAtRoot: false,                 // Whether current page is at root (/)
+
+  // Asset paths (automatically adjusted for subdirectories)
+  cssPath: "../styles.css",        // CSS path (relative)
+  assetsPath: "../assets"          // Assets path (relative)
+}
+```
+
+**Language Switcher Integration:**
+
+The default theme includes a language switcher partial that automatically:
+- Shows only when `isMultiLanguage` is true
+- Highlights the current language
+- Generates correct relative links based on `isAtRoot` and `site.defaultLanguage`
+
+```handlebars
+{{> language-switcher}}
 ```
 
 ## Handlebars Helpers
@@ -519,6 +552,34 @@ Always use the `{{t}}` helper for UI strings:
 <!-- Bad - hardcoded English -->
 <h2>Experience</h2>
 ```
+
+**Dynamic Asset Paths:**
+
+Always use `{{cssPath}}` and `{{assetsPath}}` for referencing assets. These paths are automatically adjusted for multi-language builds where pages may be in subdirectories:
+
+```handlebars
+<!-- CSS reference (required) -->
+<link rel="stylesheet" href="{{cssPath}}">
+
+<!-- Image assets -->
+<img src="{{assetsPath}}/logo.png" alt="Logo">
+```
+
+**Language Switcher:**
+
+Include the language switcher partial to allow users to switch between languages:
+
+```handlebars
+<header>
+  {{> language-switcher}}
+  <!-- Your header content -->
+</header>
+```
+
+The switcher automatically:
+- Only shows when multiple languages are available (`isMultiLanguage`)
+- Highlights the current language
+- Generates correct links based on URL structure
 
 ## Example Theme
 
