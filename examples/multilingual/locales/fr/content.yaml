@@ -1,0 +1,32 @@
+# French locale file / Fichier de traduction française
+
+sections:
+  experience: Expérience
+  education: Formation
+  skills: Compétences
+  languages: Langues
+  hobbies: Loisirs & Intérêts
+  social: Connectez-vous avec moi
+
+labels:
+  present: Présent
+  location: Lieu
+  duration: Durée
+  email: E-mail
+  phone: Téléphone
+  website: Site web
+  downloadPdf: Télécharger PDF
+
+months:
+  - Janvier
+  - Février
+  - Mars
+  - Avril
+  - Mai
+  - Juin
+  - Juillet
+  - Août
+  - Septembre
+  - Octobre
+  - Novembre
+  - Décembre

@@ -1,0 +1,19 @@
+# Minimal Resume Configuration
+# This example shows the absolute minimum required fields
+
+profile:
+  name: Jane Smith
+  email: jane.smith@example.com
+  introduction: Software developer with 5 years of experience in web development.
+
+experience:
+  - company: Tech Company
+    position: Software Developer
+    startDate: "2020-01"
+    endDate: present
+
+education:
+  - institution: State University
+    degree: Bachelor of Science in Computer Science
+    startDate: "2015"
+    endDate: "2019"

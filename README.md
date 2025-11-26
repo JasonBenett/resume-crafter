@@ -329,6 +329,74 @@ Options:
   -c, --config <path>   Path to config file (default: "resumes/resume.yaml")
 ```
 
+## 🚀 Deployment
+
+Your generated resume is a static website that can be deployed anywhere. Here are the most popular options:
+
+### GitHub Pages
+
+1. **Build your resume:**
+```bash
+node src/cli.js build
+```
+
+2. **Create a new GitHub repository**
+
+3. **Push the dist folder:**
+```bash
+cd dist
+git init
+git add .
+git commit -m "Deploy resume"
+git branch -M main
+git remote add origin https://github.com/yourusername/your-resume.git
+git push -u origin main
+```
+
+4. **Enable GitHub Pages:**
+   - Go to repository Settings → Pages
+   - Select "main" branch as source
+   - Your resume will be at `https://yourusername.github.io/your-resume`
+
+### Netlify
+
+1. **Build your resume:**
+```bash
+node src/cli.js build
+```
+
+2. **Deploy via Netlify CLI:**
+```bash
+npm install -g netlify-cli
+netlify deploy --dir=dist --prod
+```
+
+Or use the Netlify web interface to drag & drop the `dist` folder.
+
+### Vercel
+
+1. **Build your resume:**
+```bash
+node src/cli.js build
+```
+
+2. **Deploy via Vercel CLI:**
+```bash
+npm install -g vercel
+cd dist
+vercel --prod
+```
+
+Or connect your GitHub repository to Vercel for automatic deployments.
+
+### Custom Domain
+
+After deployment, you can add a custom domain:
+
+- **GitHub Pages**: Add a `CNAME` file in your dist folder before deploying
+- **Netlify**: Use the Netlify dashboard to add a custom domain
+- **Vercel**: Use the Vercel dashboard to add a custom domain
+
 ## 🤝 Contributing
 
 Contributions are welcome! This project was built entirely with Claude Code, demonstrating the power of AI-assisted development. Feel free to:
