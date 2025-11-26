@@ -1,29 +1,33 @@
-const { describe, test, before, after } = require('node:test');
+const { describe, test } = require('node:test');
 const assert = require('node:assert');
 const path = require('path');
 const fs = require('fs-extra');
 const { buildResume } = require('../../src/generator');
 
 describe('Build Integration Tests', () => {
-  const testOutputDir = path.join(__dirname, '../tmp/test-output');
+  // Helper to get unique output directory for each test
+  function getTestOutputDir(testName) {
+    return path.join(__dirname, '../tmp', testName.replace(/\s+/g, '-'));
+  }
 
-  before(async () => {
-    // Clean up test output directory before tests
-    await fs.remove(testOutputDir);
-  });
-
-  after(async () => {
-    // Clean up after all tests
-    await fs.remove(path.join(__dirname, '../tmp'));
-  });
+  // Helper to clean up after test
+  async function cleanup(testDir) {
+    try {
+      await fs.remove(testDir);
+    } catch (error) {
+      // Ignore cleanup errors
+    }
+  }
 
   describe('Basic Example Build', () => {
     test('should build basic example successfully', async () => {
+      const outputPath = getTestOutputDir('basic-example-build');
       const configPath = path.join(
         __dirname,
         '../../examples/basic/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'basic');
+
+      await cleanup(outputPath);
 
       await buildResume({
         configPath,
@@ -42,14 +46,18 @@ describe('Build Integration Tests', () => {
 
       assert.strictEqual(indexExists, true);
       assert.strictEqual(stylesExist, true);
+
+      await cleanup(outputPath);
     });
 
     test('should generate valid HTML', async () => {
+      const outputPath = getTestOutputDir('basic-html');
       const configPath = path.join(
         __dirname,
         '../../examples/basic/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'basic-html');
+
+      await cleanup(outputPath);
 
       await buildResume({
         configPath,
@@ -69,14 +77,18 @@ describe('Build Integration Tests', () => {
       assert.ok(html.includes('<head>'));
       assert.ok(html.includes('<body'));  // Match <body with or without attributes
       assert.ok(html.includes('</html>'));
+
+      await cleanup(outputPath);
     });
 
     test('should include profile data in output', async () => {
+      const outputPath = getTestOutputDir('basic-profile');
       const configPath = path.join(
         __dirname,
         '../../examples/basic/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'basic-profile');
+
+      await cleanup(outputPath);
 
       await buildResume({
         configPath,
@@ -93,6 +105,8 @@ describe('Build Integration Tests', () => {
       // Check that profile data is included
       assert.ok(html.includes('John Doe'));
       assert.ok(html.includes('john.doe@example.com'));
+
+      await cleanup(outputPath);
     });
   });
 
@@ -102,7 +116,7 @@ describe('Build Integration Tests', () => {
         __dirname,
         '../../examples/minimal/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'minimal');
+      const outputPath = getTestOutputDir('minimal');
 
       await buildResume({
         configPath,
@@ -122,7 +136,7 @@ describe('Build Integration Tests', () => {
         __dirname,
         '../../examples/minimal/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'minimal-data');
+      const outputPath = getTestOutputDir('minimal-data');
 
       await buildResume({
         configPath,
@@ -146,7 +160,7 @@ describe('Build Integration Tests', () => {
         __dirname,
         '../../examples/multilingual/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'multilingual-en');
+      const outputPath = getTestOutputDir('multilingual-en');
 
       await buildResume({
         configPath,
@@ -169,7 +183,7 @@ describe('Build Integration Tests', () => {
         __dirname,
         '../../examples/multilingual/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'multilingual-fr');
+      const outputPath = getTestOutputDir('multilingual-fr');
 
       await buildResume({
         configPath,
@@ -192,7 +206,7 @@ describe('Build Integration Tests', () => {
         __dirname,
         '../../examples/multilingual/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'multilingual-es');
+      const outputPath = getTestOutputDir('multilingual-es');
 
       await buildResume({
         configPath,
@@ -213,17 +227,22 @@ describe('Build Integration Tests', () => {
 
   describe('Error Handling', () => {
     test('should throw error for non-existent config', async () => {
+      const outputPath = getTestOutputDir('error-nonexistent');
+
       await assert.rejects(
         buildResume({
           configPath: '/non/existent/config.yaml',
           themeName: 'default',
-          outputPath: testOutputDir,
+          outputPath,
           language: 'en',
         })
       );
+
+      await cleanup(outputPath);
     });
 
     test('should throw error for invalid theme', async () => {
+      const outputPath = getTestOutputDir('error-invalid-theme');
       const configPath = path.join(
         __dirname,
         '../../examples/basic/resume.yaml'
@@ -233,10 +252,12 @@ describe('Build Integration Tests', () => {
         buildResume({
           configPath,
           themeName: 'non-existent-theme',
-          outputPath: testOutputDir,
+          outputPath,
           language: 'en',
         })
       );
+
+      await cleanup(outputPath);
     });
   });
 
@@ -246,7 +267,7 @@ describe('Build Integration Tests', () => {
         __dirname,
         '../../examples/basic/resume.yaml'
       );
-      const outputPath = path.join(testOutputDir, 'css-test');
+      const outputPath = getTestOutputDir('css-test');
 
       await buildResume({
         configPath,
