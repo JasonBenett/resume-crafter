@@ -1,0 +1,109 @@
+# Resume Configuration Example
+# This file demonstrates the structure of a resume configuration in YAML format
+
+profile:
+  name: John Doe
+  email: john.doe@example.com
+  phone: "+1 (555) 123-4567"
+  city: San Francisco
+  country: USA
+  website: https://johndoe.dev
+  introduction: |
+    Experienced software engineer with a passion for building scalable web applications
+    and leading development teams. Specialized in full-stack development with modern
+    JavaScript frameworks and cloud technologies.
+
+experience:
+  - company: Tech Corp
+    position: Senior Software Engineer
+    location: San Francisco, CA
+    startDate: "2020-06"
+    endDate: present
+    description: Lead developer for cloud-based SaaS platform
+    tasks:
+      - Architected and implemented microservices infrastructure serving 1M+ users
+      - Led team of 5 engineers in agile development process
+      - Reduced application load time by 40% through performance optimization
+    technologies:
+      - React
+      - Node.js
+      - AWS
+      - PostgreSQL
+
+  - company: StartupXYZ
+    position: Full Stack Developer
+    location: Remote
+    startDate: "2018-03"
+    endDate: "2020-05"
+    description: Core team member building innovative web applications
+    tasks:
+      - Developed responsive web applications using React and TypeScript
+      - Implemented RESTful APIs and database schemas
+      - Collaborated with designers to create intuitive user interfaces
+    technologies:
+      - React
+      - TypeScript
+      - Express.js
+      - MongoDB
+
+education:
+  - institution: University of California
+    degree: Bachelor of Science in Computer Science
+    field: Computer Science
+    location: Berkeley, CA
+    startDate: "2014"
+    endDate: "2018"
+    gpa: 3.8
+    honors: Cum Laude
+
+skills:
+  - category: Programming Languages
+    items:
+      - JavaScript/TypeScript
+      - Python
+      - Java
+      - Go
+
+  - category: Frontend
+    items:
+      - React
+      - Vue.js
+      - HTML/CSS
+      - Tailwind CSS
+
+  - category: Backend
+    items:
+      - Node.js
+      - Express.js
+      - Django
+      - RESTful APIs
+
+  - category: Cloud & DevOps
+    items:
+      - AWS
+      - Docker
+      - Kubernetes
+      - CI/CD
+
+languages:
+  - language: English
+    proficiency: native
+  - language: Spanish
+    proficiency: intermediate
+
+hobbies:
+  - Open source contributions
+  - Photography
+  - Hiking
+  - Playing guitar
+
+social:
+  - platform: GitHub
+    url: https://github.com/johndoe
+    username: johndoe
+  - platform: LinkedIn
+    url: https://linkedin.com/in/johndoe
+    username: johndoe
+  - platform: Twitter
+    url: https://twitter.com/johndoe
+    username: "@johndoe"

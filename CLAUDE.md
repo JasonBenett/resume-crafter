@@ -16,7 +16,8 @@ Key features:
 
 - `requirements/MVP_TASKS.md` - Detailed MVP task list (kept up-to-date with progress)
   - **Phase 1: Project Foundation & Setup** ✅ Complete
-  - Phase 2-9: In progress
+  - **Phase 2: Configuration System** ✅ Complete
+  - Phase 3-9: In progress
 
 ## Tech Stack
 
@@ -40,8 +41,8 @@ The system supports these resume content types via config files:
 
 ## Development Commands
 
-- `npm run build` - Build resume from config (uses default theme, looks for config.json)
-- `npm run dev` - Watch mode for development (rebuilds on file changes)
+- `npm run build` - Build resume from example config (examples/basic/resume.yaml)
+- `npm run dev` - Watch mode for development (rebuilds on source/example changes)
 - `npm run lint` - Run ESLint on source code
 - `npm run format` - Auto-format code with Prettier
 - `npm run format:check` - Check if code is properly formatted
@@ -49,10 +50,11 @@ The system supports these resume content types via config files:
 
 ### CLI Commands
 
-- `node src/cli.js build` - Build with default options
-- `node src/cli.js build -c path/to/config.json` - Specify config file
+- `node src/cli.js build` - Build with default options (resume.yaml, default theme, English)
+- `node src/cli.js build -c path/to/resume.yaml` - Specify YAML config file
 - `node src/cli.js build -t theme-name` - Use specific theme
 - `node src/cli.js build -o output/dir` - Specify output directory
+- `node src/cli.js build -l fr` - Build with French locale (if available)
 
 ## Architecture
 
@@ -66,7 +68,18 @@ The system supports these resume content types via config files:
   - `index.js` - Main module exports
   - `generator/` - Build orchestration
     - `index.js` - Main build function that coordinates the generation process
-  - `config/` - Configuration loading and validation (Phase 2)
+  - `config/` - Configuration loading and validation (Phase 2 - Complete)
+    - `index.js` - Main config module exports
+    - `loader.js` - YAML file loading with js-yaml
+    - `validator.js` - JSON schema validation with Ajv
+    - `i18n.js` - Multi-language support utilities
+    - `schemas/` - JSON schemas for validation
+      - `resume.schema.js` - Master schema
+      - `profile.schema.js` - Profile/personal info
+      - `experience.schema.js` - Work experience
+      - `education.schema.js` - Education/diplomas
+      - `hobbies.schema.js` - Hobbies list
+      - `social.schema.js` - Social media links
   - `themes/` - Theme loading and processing (Phase 3)
   - `utils/` - Utility functions
     - `cssProcessor.js` - Tailwind CSS processing with PostCSS
@@ -76,8 +89,34 @@ The system supports these resume content types via config files:
     - `templates/` - Handlebars templates (Phase 5)
     - `assets/` - Theme-specific assets
       - `styles.css` - Base CSS with Tailwind imports
-- `examples/` - Example configuration files (Phase 7)
+- `examples/` - Example configuration files
+  - `basic/` - Basic example with all features
+    - `resume.yaml` - Complete resume configuration example
+    - `locales/en/content.yaml` - English translations
 - `dist/` - Generated static site output (gitignored)
+
+### Configuration System (Phase 2 - Complete)
+
+**YAML-based Configuration:**
+- Uses YAML for human-friendly configuration files
+- JSON Schema validation ensures data integrity
+- Comprehensive schemas for all content types (profile, experience, education, skills, languages, hobbies, social)
+- Helpful error messages for validation failures
+
+**Multi-language Support (i18n):**
+- Locale files structure: `locales/{lang}/content.yaml`
+- CLI flag `--language` to specify locale
+- Graceful fallback when locale not found
+- Example English locale provided
+
+**Example Usage:**
+```bash
+# Build with default English locale
+node src/cli.js build -c examples/basic/resume.yaml
+
+# Build with specific locale
+node src/cli.js build -c examples/basic/resume.yaml -l fr
+```
 
 ### Build Pipeline (Phase 1 - Complete)
 

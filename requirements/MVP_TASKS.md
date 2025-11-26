@@ -17,26 +17,28 @@ This document outlines the detailed tasks required to build a functional first M
 - [x] Implement file copying/asset handling for static generation
 - [x] Add development mode with file watching
 
-## Phase 2: Configuration System
+## Phase 2: Configuration System ✅
 
 ### 2.1 Config Schema Design
-- [ ] Define JSON schema for profile data (name, DOB, phone, city, country, intro)
-- [ ] Define schema for professional experience entries (dates, company, title, description, tasks)
-- [ ] Define schema for education/diploma entries (date, school, title, results, description)
-- [ ] Define schema for hobbies list
-- [ ] Define schema for social networks (platform, URL, username)
-- [ ] Create master config schema combining all content types
+- [x] Install js-yaml for YAML parsing
+- [x] Define JSON schema for profile data (name, DOB, phone, city, country, intro)
+- [x] Define schema for professional experience entries (dates, company, title, description, tasks)
+- [x] Define schema for education/diploma entries (date, school, title, results, description)
+- [x] Define schema for hobbies list
+- [x] Define schema for social networks (platform, URL, username)
+- [x] Create master config schema combining all content types (includes skills and languages)
 
 ### 2.2 Multi-language Support
-- [ ] Design i18n structure for translations (e.g., `locales/{lang}/content.json`)
-- [ ] Implement language detection/selection logic
-- [ ] Define how themes specify supported languages
-- [ ] Create example configs in multiple languages
+- [x] Design i18n structure for translations (e.g., `locales/{lang}/content.yaml`)
+- [x] Implement language detection/selection logic (via CLI --language flag)
+- [x] Define how themes specify supported languages (documented in i18n.js)
+- [x] Create example configs in multiple languages (English example provided)
 
-### 2.3 Config Validation
-- [ ] Implement JSON schema validation for user configs
-- [ ] Add helpful error messages for invalid configurations
-- [ ] Create config file loader with validation
+### 2.3 Config Validation & Loading
+- [x] Implement YAML file loader
+- [x] Implement JSON schema validation for user configs (validate YAML after parsing)
+- [x] Add helpful error messages for invalid configurations
+- [x] Handle YAML parsing errors gracefully
 
 ## Phase 3: Theme System Architecture
 

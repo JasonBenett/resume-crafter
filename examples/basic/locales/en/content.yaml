@@ -1,0 +1,33 @@
+# English locale file
+# Contains translatable strings for UI labels and section headings
+
+sections:
+  experience: Experience
+  education: Education
+  skills: Skills
+  languages: Languages
+  hobbies: Hobbies & Interests
+  social: Connect With Me
+
+labels:
+  present: Present
+  location: Location
+  duration: Duration
+  email: Email
+  phone: Phone
+  website: Website
+  downloadPdf: Download PDF
+
+months:
+  - January
+  - February
+  - March
+  - April
+  - May
+  - June
+  - July
+  - August
+  - September
+  - October
+  - November
+  - December

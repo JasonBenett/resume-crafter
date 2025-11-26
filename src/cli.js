@@ -14,9 +14,10 @@ program
 program
   .command('build')
   .description('Build a resume website from configuration')
-  .option('-c, --config <path>', 'Path to config file', './config.json')
+  .option('-c, --config <path>', 'Path to config file', './resume.yaml')
   .option('-t, --theme <name>', 'Theme name to use', 'default')
   .option('-o, --output <path>', 'Output directory', './dist')
+  .option('-l, --language <code>', 'Language code (e.g., en, fr, es)', 'en')
   .action(async (options) => {
     try {
       console.log('Building resume...');
@@ -24,6 +25,7 @@ program
         configPath: path.resolve(options.config),
         themeName: options.theme,
         outputPath: path.resolve(options.output),
+        language: options.language,
       });
       console.log('✓ Resume built successfully!');
     } catch (error) {
