@@ -12,7 +12,8 @@
     "lint": "eslint src/**/*.js",
     "format": "prettier --write \"src/**/*.js\" \"themes/**/*.{html,css,js}\"",
     "format:check": "prettier --check \"src/**/*.js\" \"themes/**/*.{html,css,js}\"",
-    "test": "echo \"Tests will be added in Phase 8\" && exit 0"
+    "test": "node --test tests/**/*.test.js",
+    "test:watch": "node --test --watch tests/**/*.test.js"
   },
   "repository": {
     "type": "git",
