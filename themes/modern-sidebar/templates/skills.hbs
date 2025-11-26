@@ -1,0 +1,16 @@
+<section class="skills">
+  <h2 class="section-heading">{{t "sections.skills"}}</h2>
+
+  <div class="skills-container">
+    {{#each skills}}
+      <div class="skill-category">
+        <h3 class="skill-category-name">{{this.category}}</h3>
+        <div class="skill-items">
+          {{#each this.items}}
+            <span class="skill-tag">{{this}}</span>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<section class="education">
+  <h2 class="section-heading">{{t "sections.education"}}</h2>
+
+  <div class="items-container">
+    {{#each education}}
+      <div class="education-item">
+        <div class="item-header">
+          <div>
+            <h3 class="item-title">{{this.degree}}</h3>
+            {{#if this.field}}
+              <p class="item-field">{{this.field}}</p>
+            {{/if}}
+            <p class="item-company">{{this.institution}}</p>
+          </div>
+          <div class="item-meta">
+            {{#if this.startDate}}
+              <p class="item-date">{{this.startDate}} - {{this.endDate}}</p>
+            {{/if}}
+            {{#if this.location}}
+              <p class="item-location">{{this.location}}</p>
+            {{/if}}
+          </div>
+        </div>
+
+        {{#if this.gpa}}
+          <p class="item-description">GPA: {{this.gpa}}</p>
+        {{/if}}
+
+        {{#if this.highlights}}
+          <ul class="item-highlights">
+            {{#each this.highlights}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+</section>

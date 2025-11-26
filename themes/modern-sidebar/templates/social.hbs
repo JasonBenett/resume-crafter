@@ -1,0 +1,20 @@
+<section class="social">
+  <h2 class="section-heading">{{t "sections.social"}}</h2>
+
+  <div class="social-links">
+    {{#each social}}
+      <a href="{{this.url}}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="social-link no-print">
+        <div>
+          <p class="social-platform">{{this.platform}}</p>
+          {{#if this.username}}
+            <p class="social-username">{{this.username}}</p>
+          {{/if}}
+        </div>
+        <span class="social-arrow">→</span>
+      </a>
+    {{/each}}
+  </div>
+</section>

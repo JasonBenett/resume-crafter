@@ -1,0 +1,68 @@
+<aside class="sidebar">
+  <div class="sidebar-content">
+    {{#if profile.photo}}
+      <div class="profile-photo-container">
+        <img src="{{profile.photo}}" alt="{{profile.name}}" class="profile-photo">
+      </div>
+    {{/if}}
+
+    <h1 class="profile-name">{{profile.name}}</h1>
+
+    <div class="contact-section">
+      {{#if profile.email}}
+        <div class="contact-item">
+          <span class="contact-icon">✉</span>
+          <span class="contact-text">{{profile.email}}</span>
+        </div>
+      {{/if}}
+
+      {{#if profile.phone}}
+        <div class="contact-item">
+          <span class="contact-icon">☎</span>
+          <span class="contact-text">{{profile.phone}}</span>
+        </div>
+      {{/if}}
+
+      {{#if profile.city}}
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <span class="contact-text">{{profile.city}}{{#if profile.country}}, {{profile.country}}{{/if}}</span>
+        </div>
+      {{/if}}
+
+      {{#if profile.website}}
+        <div class="contact-item">
+          <span class="contact-icon">🌐</span>
+          <a href="{{profile.website}}" target="_blank" rel="noopener noreferrer" class="contact-link">
+            {{profile.website}}
+          </a>
+        </div>
+      {{/if}}
+    </div>
+
+    {{#if languages}}
+      <div class="sidebar-section">
+        <h2 class="sidebar-heading">{{t "sections.languages"}}</h2>
+        <div class="languages-list">
+          {{#each languages}}
+            <div class="language-item">
+              <span class="language-name">{{this.language}}</span>
+              <span class="language-level">{{this.proficiency}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if hobbies}}
+      <div class="sidebar-section">
+        <h2 class="sidebar-heading">{{t "sections.hobbies"}}</h2>
+        <div class="hobbies-list">
+          {{#each hobbies}}
+            <span class="hobby-tag">{{this}}</span>
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</aside>

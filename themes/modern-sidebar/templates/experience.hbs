@@ -1,0 +1,42 @@
+<section class="experience">
+  <h2 class="section-heading">{{t "sections.experience"}}</h2>
+
+  <div class="items-container">
+    {{#each experience}}
+      <div class="experience-item">
+        <div class="item-header">
+          <div>
+            <h3 class="item-title">{{this.position}}</h3>
+            <p class="item-company">{{this.company}}</p>
+          </div>
+          <div class="item-meta">
+            <p class="item-date">{{formatDate this.startDate}} - {{formatDate this.endDate}}</p>
+            {{#if this.location}}
+              <p class="item-location">{{this.location}}</p>
+            {{/if}}
+          </div>
+        </div>
+
+        {{#if this.description}}
+          <p class="item-description">{{this.description}}</p>
+        {{/if}}
+
+        {{#if this.tasks}}
+          <ul class="item-highlights">
+            {{#each this.tasks}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
+
+        {{#if this.technologies}}
+          <div class="technologies">
+            {{#each this.technologies}}
+              <span class="tech-tag">{{this}}</span>
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+</section>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{currentLanguage}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{profile.name}} - Resume</title>
+  <link rel="stylesheet" href="{{cssPath}}">
+</head>
+<body>
+  <div class="layout-container">
+    <!-- Sidebar -->
+    {{> sidebar}}
+
+    <!-- Main Content -->
+    <main class="main-content">
+      {{#if isMultiLanguage}}
+        {{> language-switcher}}
+      {{/if}}
+
+      {{#if profile.introduction}}
+        <section class="introduction">
+          <p>{{profile.introduction}}</p>
+        </section>
+      {{/if}}
+
+      {{#if experience}}
+        {{> experience}}
+      {{/if}}
+
+      {{#if education}}
+        {{> education}}
+      {{/if}}
+
+      {{#if skills}}
+        {{> skills}}
+      {{/if}}
+
+      {{#if social}}
+        {{> social}}
+      {{/if}}
+    </main>
+  </div>
+</body>
+</html>
