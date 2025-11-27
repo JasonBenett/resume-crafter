@@ -1,0 +1,32 @@
+<section class="slide slide-skills" data-gradient="4">
+  <div class="slide-content">
+    <h2 class="slide-title">{{t "sections.skills"}}</h2>
+
+    <div class="skills-grid">
+      {{#each skills}}
+        <div class="skill-group">
+          <h3 class="skill-group-title">{{this.category}}</h3>
+          <div class="skill-items">
+            {{#each this.items}}
+              <span class="skill-item">{{this}}</span>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+    {{#if languages}}
+      <div class="languages-section">
+        <h3 class="languages-title">{{t "sections.languages"}}</h3>
+        <div class="languages-grid">
+          {{#each languages}}
+            <div class="language-card">
+              <span class="language-name">{{this.language}}</span>
+              <span class="language-level">{{this.proficiency}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</section>

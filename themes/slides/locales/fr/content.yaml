@@ -1,0 +1,10 @@
+sections:
+  experience: Expérience
+  education: Formation
+  skills: Compétences & Expertise
+  languages: Langues
+  social: Connexion
+  contact: Contactez-moi
+
+ui:
+  scroll: Faites défiler

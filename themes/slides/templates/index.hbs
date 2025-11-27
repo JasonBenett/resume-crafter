@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="{{currentLanguage}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{profile.name}} - Resume</title>
+  <link rel="stylesheet" href="{{cssPath}}">
+</head>
+<body>
+  <!-- Language Switcher -->
+  {{#if isMultiLanguage}}
+    <div class="language-switcher">
+      {{#each availableLanguages}}
+        {{#if (eq this ../currentLanguage)}}
+          <span class="language-link active">{{this}}</span>
+        {{else}}
+          {{#if ../isAtRoot}}
+            <a href="{{this}}/" class="language-link">{{this}}</a>
+          {{else}}
+            {{#if (eq this ../site.defaultLanguage)}}
+              <a href="../" class="language-link">{{this}}</a>
+            {{else}}
+              <a href="../{{this}}/" class="language-link">{{this}}</a>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <!-- Slides Container -->
+  <div class="slides-container">
+    <!-- Slide 1: Profile -->
+    {{> slide-profile}}
+
+    <!-- Slide 2: Experience -->
+    {{#if experience}}
+      {{> slide-experience}}
+    {{/if}}
+
+    <!-- Slide 3: Education -->
+    {{#if education}}
+      {{> slide-education}}
+    {{/if}}
+
+    <!-- Slide 4: Skills -->
+    {{#if skills}}
+      {{> slide-skills}}
+    {{/if}}
+
+    <!-- Final Slide: Contact -->
+    {{> slide-contact}}
+  </div>
+
+  <script>
+    // Keyboard navigation for slides
+    const container = document.querySelector('.slides-container');
+    const slides = document.querySelectorAll('.slide');
+
+    document.addEventListener('keydown', (e) => {
+      const currentScroll = container.scrollTop;
+      const slideHeight = slides[0].offsetHeight;
+      const currentSlide = Math.round(currentScroll / slideHeight);
+
+      if (e.key === 'ArrowDown') {
+        if (currentSlide < slides.length - 1) {
+          slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (e.key === 'ArrowUp') {
+        if (currentSlide > 0) {
+          slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+
+    // Horizontal navigation for experience items
+    const experienceContainers = document.querySelectorAll('.timeline');
+    experienceContainers.forEach(timeline => {
+      const items = timeline.querySelectorAll('.timeline-item');
+      if (items.length > 1) {
+        timeline.classList.add('horizontal-scroll');
+      }
+    });
+
+    // Horizontal navigation for education items
+    const educationGrids = document.querySelectorAll('.education-grid');
+    educationGrids.forEach(grid => {
+      const items = grid.querySelectorAll('.education-card');
+      if (items.length > 1) {
+        grid.classList.add('horizontal-scroll');
+      }
+    });
+
+    // Arrow key navigation within horizontal scrolls
+    document.addEventListener('keydown', (e) => {
+      const activeElement = document.activeElement;
+      const horizontalScroll = activeElement.closest('.horizontal-scroll');
+
+      if (horizontalScroll && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        e.preventDefault();
+        const scrollAmount = horizontalScroll.offsetWidth * 0.8;
+        if (e.key === 'ArrowRight') {
+          horizontalScroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        } else {
+          horizontalScroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
