@@ -14,7 +14,6 @@ A modern, flexible static website generator for creating beautiful, professional
 - **🚀 Zero Database** - Pure static site generation
 - **⚡ Fast Build** - Quick compilation with Tailwind CSS v4
 - **🎯 SEO Ready** - Semantic HTML structure
-- **🖨️ Print Friendly** - Optimized for PDF export
 
 ## 🚀 Quick Start
 
