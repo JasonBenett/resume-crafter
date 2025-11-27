@@ -1,0 +1,19 @@
+nav:
+  about: À propos
+  experience: Expérience
+  education: Formation
+  skills: Compétences
+  hobbies: Loisirs
+  contact: Contact
+
+sections:
+  about: À propos de moi
+  experience: Où j'ai travaillé
+  education: Formation
+  skills: Compétences & Technologies
+  languages: Langues
+  interests: Intérêts & Loisirs
+  contact: Contactez-moi
+
+footer:
+  built: Créé par

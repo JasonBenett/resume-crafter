@@ -18,7 +18,7 @@ program
   .command('build')
   .description('Build a resume website from configuration')
   .option('-c, --config <path>', 'Path to config file', 'resumes/resume.yaml')
-  .option('-t, --theme <name>', 'Theme name to use', 'default')
+  .option('-t, --theme <name>', 'Theme name to use', 'brittany')
   .option('-o, --output <path>', 'Output directory', './dist')
   .option(
     '-l, --language <code>',

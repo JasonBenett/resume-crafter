@@ -33,6 +33,11 @@ module.exports = {
           description:
             'List of languages to build (e.g., ["en", "fr"]). If not specified, all available theme languages are built.',
         },
+        particles: {
+          type: 'boolean',
+          description:
+            'Enable floating particles background effect (default: false)',
+        },
       },
       additionalProperties: false,
       description: 'Site-wide configuration options',

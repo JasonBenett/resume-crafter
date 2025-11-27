@@ -70,7 +70,7 @@ node src/cli.js build [options]
 | Option | Alias | Description | Default |
 |--------|-------|-------------|---------|
 | `--config <path>` | `-c` | Path to resume config file | `resumes/resume.yaml` |
-| `--theme <name>` | `-t` | Theme name to use | `default` |
+| `--theme <name>` | `-t` | Theme name to use | `brittany` |
 | `--output <path>` | `-o` | Output directory | `./dist` |
 | `--language <code>` | `-l` | Language code (e.g., en, fr, es) | Auto-detect all |
 | `--single-language` | | Force single-language build | `false` |

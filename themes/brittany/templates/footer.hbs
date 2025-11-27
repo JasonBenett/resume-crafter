@@ -1,0 +1,19 @@
+<footer class="footer">
+  <div class="footer-contact">
+    {{#if profile.email}}
+      <a href="mailto:{{profile.email}}" class="footer-contact-link">{{profile.email}}</a>
+    {{/if}}
+
+    {{#if profile.phone}}
+      <p class="footer-contact-item">{{profile.phone}}</p>
+    {{/if}}
+
+    {{#if profile.city}}
+      <p class="footer-contact-item">{{profile.city}}{{#if profile.country}}, {{profile.country}}{{/if}}</p>
+    {{/if}}
+  </div>
+
+  <p class="footer-text">
+    {{t "footer.built"}} {{profile.name}}
+  </p>
+</footer>

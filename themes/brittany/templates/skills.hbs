@@ -1,0 +1,33 @@
+<section class="section" id="skills">
+  <h2 class="section-title">
+    <span class="section-number">04.</span>
+    {{t "sections.skills"}}
+  </h2>
+
+  <div class="skills-grid">
+    {{#each skills}}
+      <div class="skill-category">
+        <h3 class="skill-category-title">{{this.category}}</h3>
+        <ul class="skill-list">
+          {{#each this.items}}
+            <li class="skill-tag">{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/each}}
+  </div>
+
+  {{#if languages}}
+    <div class="languages-section">
+      <h3 class="languages-title">{{t "sections.languages"}}</h3>
+      <ul class="languages-list">
+        {{#each languages}}
+          <li class="language-item">
+            <span class="language-name">{{this.language}}</span>
+            <span class="language-level">{{this.proficiency}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</section>

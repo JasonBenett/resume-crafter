@@ -63,6 +63,10 @@ module.exports = {
         },
         description: 'Technologies or tools used',
       },
+      url: {
+        type: 'string',
+        description: 'URL to company website or project (optional)',
+      },
     },
     required: ['company', 'position', 'startDate'],
     additionalProperties: false,

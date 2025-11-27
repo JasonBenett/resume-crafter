@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="{{currentLanguage}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{profile.name}}</title>
+    <link rel="stylesheet" href="{{cssPath}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{#if site.particles}}
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    {{/if}}
+</head>
+<body>
+{{#if site.particles}}
+<div id="particles-js"></div>
+{{/if}}
+<div class="main-layout">
+        <header class="site-header">
+            <div>
+                {{> hero}}
+
+                <!-- Navigation -->
+                <nav class="nav">
+                    <a href="#experience" class="nav-link">{{t "nav.experience"}}</a>
+                    {{#if education}}
+                        <a href="#education" class="nav-link">{{t "nav.education"}}</a>
+                    {{/if}}
+                    {{#if skills}}
+                        <a href="#skills" class="nav-link">{{t "nav.skills"}}</a>
+                    {{/if}}
+                    {{#if hobbies}}
+                        <a href="#hobbies" class="nav-link">{{t "nav.hobbies"}}</a>
+                    {{/if}}
+                </nav>
+
+                <!-- Social Links -->
+                {{#if social}}
+                    <div class="sidebar-social">
+                        {{#each social}}
+                            <a href="{{this.url}}" target="_blank" rel="noopener noreferrer" class="social-link"
+                               aria-label="{{this.platform}}">
+                                {{this.platform}}
+                            </a>
+                        {{/each}}
+                    </div>
+                {{/if}}
+
+                <!-- Language Switcher -->
+                {{#if isMultiLanguage}}
+                    <div class="language-switcher">
+                        {{#each availableLanguages}}
+                            {{#if (eq this ../currentLanguage)}}
+                                <span class="language-link active">{{this}}</span>
+                            {{else}}
+                                {{#if ../isAtRoot}}
+                                    <a href="{{this}}/" class="language-link">{{this}}</a>
+                                {{else}}
+                                    {{#if (eq this ../site.defaultLanguage)}}
+                                        <a href="../" class="language-link">{{this}}</a>
+                                    {{else}}
+                                        <a href="../{{this}}/" class="language-link">{{this}}</a>
+                                    {{/if}}
+                                {{/if}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                {{/if}}
+            </div>
+        </header>
+
+        <main class="site-main">
+            {{> experience}}
+            {{#if education}}
+                {{> education}}
+            {{/if}}
+            {{#if skills}}
+                {{> skills}}
+            {{/if}}
+            {{#if hobbies}}
+                {{> about}}
+            {{/if}}
+            {{> footer}}
+        </main>
+</div>
+
+{{#if site.particles}}
+<script>
+particlesJS('particles-js', {
+  particles: {
+    number: {
+      value: 60,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    },
+    color: {
+      value: '#64ffda'
+    },
+    shape: {
+      type: 'circle'
+    },
+    opacity: {
+      value: 0.15,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 1,
+        opacity_min: 0.05,
+        sync: false
+      }
+    },
+    size: {
+      value: 2,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 2,
+        size_min: 0.1,
+        sync: false
+      }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: '#64ffda',
+      opacity: 0.1,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 0.8,
+      direction: 'none',
+      random: true,
+      straight: false,
+      out_mode: 'out',
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      onhover: {
+        enable: true,
+        mode: 'grab'
+      },
+      onclick: {
+        enable: true,
+        mode: 'push'
+      },
+      resize: true
+    },
+    modes: {
+      grab: {
+        distance: 140,
+        line_linked: {
+          opacity: 0.2
+        }
+      },
+      push: {
+        particles_nb: 3
+      }
+    }
+  },
+  retina_detect: true
+});
+</script>
+{{/if}}
+</body>
+</html>

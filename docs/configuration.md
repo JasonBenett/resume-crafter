@@ -47,6 +47,9 @@ site:
                                   # If set, this language will be at root (/) instead of a language selector
                                   # Other languages will be in subdirectories (e.g., /fr/, /es/)
                                   # Must be included in the languages array if both are specified
+
+  particles: boolean              # Enable floating particles background effect (default: false)
+                                  # Adds animated particles with interactive hover/click effects
 ```
 
 **Examples:**
@@ -64,6 +67,10 @@ site:
 # Build all theme languages with Spanish at root
 site:
   defaultLanguage: es
+
+# Enable particles background effect
+site:
+  particles: true
 ```
 
 ---
@@ -75,6 +82,7 @@ Personal information and contact details. The `name` field is required.
 ```yaml
 profile:
   name: string (required)                    # Your full name
+  position: string | translatable            # Current position or job title
   email: string (email format)               # Email address
   phone: string                              # Phone number with country code
   city: string                               # City of residence
@@ -88,6 +96,7 @@ profile:
 **Field Details:**
 
 - **name** - Required. Your full name as you want it displayed
+- **position** - Current job title or professional title (e.g., "Senior Software Engineer")
 - **email** - Validated as proper email format
 - **phone** - Include country code (e.g., "+1 (555) 123-4567")
 - **address** - Can be translated for different languages
@@ -99,6 +108,7 @@ profile:
 ```yaml
 profile:
   name: María García
+  position: Senior Software Engineer
   email: maria.garcia@example.com
   phone: "+34 612 345 678"
   city: Madrid
@@ -126,6 +136,7 @@ experience:
     description: string | translatable       # Brief role description
     tasks: array of (string | translatable)  # Responsibilities and achievements
     technologies: array of strings           # Technologies or tools used
+    url: string (URL)                        # Link to company website or project (optional)
 ```
 
 **Field Details:**
@@ -137,6 +148,7 @@ experience:
 - **description** - One-paragraph overview of the role
 - **tasks** - Bullet list of achievements and responsibilities
 - **technologies** - Tech stack (not typically translated)
+- **url** - Optional link to company website or project, opens in new tab
 
 **Example:**
 
@@ -150,6 +162,7 @@ experience:
     location: Madrid, Spain
     startDate: "2020-01"
     endDate: present
+    url: https://techsolutions.example.com
     description:
       en: Leading development of microservices architecture for enterprise clients.
       fr: Direction du développement d'architecture de microservices.
@@ -185,6 +198,7 @@ education:
     gpa: string or number                    # Grade point average
     honors: string | translatable            # Honors, awards, distinctions
     description: string | translatable       # Additional details
+    url: string (URL)                        # Link to institution or program (optional)
 ```
 
 **Field Details:**
@@ -196,6 +210,7 @@ education:
 - **endDate** - Use "present" for ongoing, or year/date
 - **gpa** - As string ("3.8/4.0") or number (3.8)
 - **honors** - Cum laude, Dean's List, etc.
+- **url** - Optional link to institution website or program page
 
 **Example:**
 
@@ -215,6 +230,7 @@ education:
     endDate: "2018"
     gpa: "3.8/4.0"
     honors: Summa Cum Laude
+    url: https://www.upm.es
 ```
 
 ---

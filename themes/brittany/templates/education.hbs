@@ -1,0 +1,38 @@
+<section class="section" id="education">
+  <ol class="education-list">
+    {{#each education}}
+      <li class="education-item group">
+        <div class="education-header">
+          {{#if this.startDate}}
+            <p class="education-date">{{this.startDate}} — {{this.endDate}}</p>
+          {{/if}}
+          <div>
+            <h3 class="education-title">
+              {{#if this.url}}
+                <a href="{{this.url}}" class="education-link" target="_blank" rel="noopener noreferrer">
+                  {{this.degree}}{{#if this.field}}, {{this.field}}{{/if}} · {{this.institution}}
+                  <span class="link-arrow">↗</span>
+                </a>
+              {{else}}
+                <span class="education-link-text">
+                  {{this.degree}}{{#if this.field}}, {{this.field}}{{/if}} · {{this.institution}}
+                </span>
+              {{/if}}
+            </h3>
+            {{#if this.gpa}}
+              <p class="education-gpa">GPA: {{this.gpa}}</p>
+            {{/if}}
+
+            {{#if this.highlights}}
+              <ul class="education-highlights">
+                {{#each this.highlights}}
+                  <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+</section>

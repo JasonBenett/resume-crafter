@@ -64,6 +64,10 @@ module.exports = {
         ...translatableString,
         description: 'Additional details about the education (translatable)',
       },
+      url: {
+        type: 'string',
+        description: 'URL to institution website or program (optional)',
+      },
     },
     required: ['institution', 'degree'],
     additionalProperties: false,

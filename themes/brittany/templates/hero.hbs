@@ -1,0 +1,17 @@
+<div class="hero">
+    <h1 class="hero-name">
+        <a href="/">{{profile.name}}</a>
+    </h1>
+
+    {{#if profile.position}}
+        <h2>
+            {{profile.position}}
+        </h2>
+    {{/if}}
+
+    {{#if profile.introduction}}
+        <h3 class="hero-tagline">
+            {{profile.introduction}}
+        </h3>
+    {{/if}}
+</div>

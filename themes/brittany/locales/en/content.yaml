@@ -1,0 +1,19 @@
+nav:
+  about: About
+  experience: Experience
+  education: Education
+  skills: Skills
+  hobbies: Hobbies
+  contact: Contact
+
+sections:
+  about: About Me
+  experience: Where I've Worked
+  education: Education
+  skills: Skills & Technologies
+  languages: Languages
+  interests: Interests & Hobbies
+  contact: Get In Touch
+
+footer:
+  built: Built by

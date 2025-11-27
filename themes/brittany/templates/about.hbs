@@ -1,0 +1,16 @@
+<section class="section" id="hobbies">
+  <div class="about-content">
+    <div class="about-text">
+      {{#if hobbies}}
+        <div class="hobbies">
+          <p class="hobbies-label">{{t "sections.interests"}}</p>
+          <div class="hobbies-list">
+            {{#each hobbies}}
+              <span class="hobby-tag">{{this}}</span>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</section>

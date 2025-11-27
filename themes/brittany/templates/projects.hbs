@@ -1,0 +1,30 @@
+<section class="section" id="contact">
+  <h2 class="section-title">
+    <span class="section-number">05.</span>
+    {{t "sections.contact"}}
+  </h2>
+
+  <div class="contact-content">
+    <div class="contact-info">
+      {{#if profile.email}}
+        <a href="mailto:{{profile.email}}" class="contact-link">{{profile.email}}</a>
+      {{/if}}
+      {{#if profile.phone}}
+        <p class="contact-item">{{profile.phone}}</p>
+      {{/if}}
+      {{#if profile.city}}
+        <p class="contact-item">{{profile.city}}{{#if profile.country}}, {{profile.country}}{{/if}}</p>
+      {{/if}}
+    </div>
+
+    {{#if social}}
+      <div class="social-links">
+        {{#each social}}
+          <a href="{{this.url}}" target="_blank" rel="noopener noreferrer" class="social-link">
+            {{this.platform}}
+          </a>
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+</section>

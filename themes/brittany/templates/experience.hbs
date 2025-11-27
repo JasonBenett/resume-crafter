@@ -1,0 +1,44 @@
+<section class="section" id="experience">
+  <ol class="experience-list">
+    {{#each experience}}
+      <li class="experience-item group">
+        <div class="experience-header">
+          <p class="experience-date">{{formatDate this.startDate}} — {{formatDate this.endDate}}</p>
+          <div>
+            <h3 class="experience-title">
+              {{#if this.url}}
+                <a href="{{this.url}}" class="experience-link" target="_blank" rel="noopener noreferrer">
+                  {{this.position}} · {{this.company}}
+                  <span class="link-arrow">↗</span>
+                </a>
+              {{else}}
+                <span class="experience-link-text">
+                  {{this.position}} · {{this.company}}
+                </span>
+              {{/if}}
+            </h3>
+            {{#if this.description}}
+              <p class="experience-description">{{this.description}}</p>
+            {{/if}}
+
+            {{#if this.tasks}}
+              <ul class="experience-tasks">
+                {{#each this.tasks}}
+                  <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+
+            {{#if this.technologies}}
+              <ul class="tech-list">
+                {{#each this.technologies}}
+                  <li class="tech-tag">{{this}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+</section>

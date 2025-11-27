@@ -34,3 +34,6 @@ tests/tmp
 # User resume configurations (keep folder structure, ignore content)
 resumes/*
 !resumes/README.md
+
+# Claude
+.claude/*local.json

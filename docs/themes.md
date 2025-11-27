@@ -27,7 +27,7 @@ Themes in Resume Crafter control the visual appearance and layout of your resume
 
 ### Default Theme
 
-By default, all resumes use the **Default Professional** theme:
+By default, all resumes use the **Brittany** theme:
 
 ```bash
 node src/cli.js build
@@ -65,11 +65,47 @@ Available themes:
 
 ## Available Themes
 
+### Brittany (Default)
+
+**Theme ID:** `brittany`
+
+A modern, minimalist theme inspired by Brittany Chiang's portfolio design. Features a dark background with a two-column layout.
+
+**Features:**
+- Dark theme with gradient background
+- Two-column layout (fixed sidebar + scrolling content)
+- Sticky navigation with smooth scrolling
+- Interactive hover effects on experience/education items
+- Optional floating particles background effect
+- Contact information in hero section
+- Multi-language support (en, fr)
+- Tailwind CSS v4 styling
+- Mobile responsive design
+
+**Unique Features:**
+- Animated particles background (configurable)
+- External link indicators on experience/education items
+- Technology tags with subtle backgrounds
+- Sticky sidebar with navigation
+
+**Best for:**
+- Software engineers and developers
+- Tech-focused resumes
+- Creative professionals seeking modern design
+
+**Example:**
+
+```bash
+node src/cli.js build -t brittany
+# Or simply (brittany is the default):
+node src/cli.js build
+```
+
 ### Default Professional
 
 **Theme ID:** `default`
 
-A clean, modern theme optimized for professional resumes.
+A clean, modern theme optimized for traditional professional resumes.
 
 **Features:**
 - Responsive design (mobile, tablet, desktop)
@@ -80,9 +116,9 @@ A clean, modern theme optimized for professional resumes.
 - Organized sections with clear hierarchy
 
 **Best for:**
-- Software engineers and developers
-- Professional resumes
+- Traditional professional resumes
 - Multi-language audiences
+- Print-focused resumes
 
 **Example:**
 
@@ -213,15 +249,16 @@ See [Multi-Language Guide](multi-language.md) for using multi-language features.
 
 ## Theme Comparison
 
-| Feature | Default Professional |
-|---------|---------------------|
-| Layout | Single column with clear sections |
-| Color Scheme | Professional blue/gray |
-| Typography | System fonts (optimized for web and print) |
-| Languages | English, French, Spanish |
-| Print | Optimized |
-| Mobile | Fully responsive |
-| Best For | Professional/technical resumes |
+| Feature | Brittany (Default) | Default Professional |
+|---------|-------------------|---------------------|
+| Layout | Two-column (sidebar + content) | Single column with clear sections |
+| Color Scheme | Dark theme with teal accents | Professional blue/gray |
+| Typography | Inter font family | System fonts (optimized for web and print) |
+| Languages | English, French | English, French, Spanish |
+| Particles Effect | Optional animated background | Not available |
+| Print | Good | Optimized |
+| Mobile | Fully responsive | Fully responsive |
+| Best For | Tech/creative professionals | Traditional professional resumes |
 
 ---
 
