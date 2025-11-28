@@ -31,7 +31,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });
@@ -61,7 +61,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });
@@ -92,7 +92,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });
@@ -120,7 +120,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });
@@ -140,7 +140,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });
@@ -164,7 +164,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });
@@ -187,7 +187,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'fr',
       });
@@ -210,7 +210,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'es',
       });
@@ -232,7 +232,7 @@ describe('Build Integration Tests', () => {
       await assert.rejects(
         buildResume({
           configPath: '/non/existent/config.yaml',
-          themeName: 'default',
+          themeName: 'brittany',
           outputPath,
           language: 'en',
         })
@@ -271,7 +271,7 @@ describe('Build Integration Tests', () => {
 
       await buildResume({
         configPath,
-        themeName: 'default',
+        themeName: 'brittany',
         outputPath,
         language: 'en',
       });

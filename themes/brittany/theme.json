@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Clean, minimal single-page portfolio inspired by Brittany Chiang's design. Features numbered sections, pill-shaped skill tags, and elegant typography.",
   "author": "Resume Crafter",
-  "supportedLanguages": ["en", "fr"],
+  "supportedLanguages": ["en", "fr", "es"],
   "templates": {
     "main": "index.hbs",
     "partials": [

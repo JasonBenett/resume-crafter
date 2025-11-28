@@ -1,0 +1,19 @@
+nav:
+  about: Acerca
+  experience: Experiencia
+  education: Educación
+  skills: Habilidades
+  hobbies: Pasatiempos
+  contact: Contacto
+
+sections:
+  about: Sobre Mí
+  experience: Dónde He Trabajado
+  education: Educación
+  skills: Habilidades y Tecnologías
+  languages: Idiomas
+  interests: Intereses y Pasatiempos
+  contact: Contáctame
+
+footer:
+  built: Creado por
