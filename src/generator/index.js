@@ -2,6 +2,7 @@ const path = require('path');
 const { processCSS } = require('../utils/cssProcessor');
 const {
   cleanDir,
+  cleanDirPreserveGit,
   ensureDir,
   writeFile,
   copyDir,
@@ -151,8 +152,8 @@ async function buildResume({
 
     console.log(`Output directory: ${outputPath}`);
 
-    // Clean output directory
-    await cleanDir(outputPath);
+    // Clean output directory (preserving .git if present)
+    await cleanDirPreserveGit(outputPath);
     await ensureDir(outputPath);
 
     if (shouldBuildMulti) {

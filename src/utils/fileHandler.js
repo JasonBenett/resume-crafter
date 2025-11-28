@@ -53,6 +53,34 @@ async function cleanDir(dirPath) {
   await fs.ensureDir(dirPath);
 }
 
+/**
+ * Clean directory but preserve .git folder if it exists
+ * @param {string} dirPath - Directory path
+ */
+async function cleanDirPreserveGit(dirPath) {
+  try {
+    // Check if directory exists
+    const exists = await fs.pathExists(dirPath);
+    if (!exists) {
+      await fs.ensureDir(dirPath);
+      return;
+    }
+
+    // Read all entries in the directory
+    const entries = await fs.readdir(dirPath);
+
+    // Remove everything except .git
+    for (const entry of entries) {
+      if (entry !== '.git') {
+        await fs.remove(require('path').join(dirPath, entry));
+      }
+    }
+  } catch (error) {
+    // If anything goes wrong, fall back to regular clean
+    await cleanDir(dirPath);
+  }
+}
+
 module.exports = {
   ensureDir,
   copyFile,
@@ -60,4 +88,5 @@ module.exports = {
   writeFile,
   readFile,
   cleanDir,
+  cleanDirPreserveGit,
 };
