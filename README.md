@@ -1,5 +1,10 @@
 # Resume Crafter
 
+[![CI](https://github.com/JasonBenett/resume-crafter/actions/workflows/ci.yml/badge.svg)](https://github.com/JasonBenett/resume-crafter/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-32%20passing-success)](https://github.com/JasonBenett/resume-crafter/actions)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D%2020.x-brightgreen)](package.json)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A modern, flexible static website generator for creating beautiful, professional resume websites from simple YAML configuration files.
 
 > **Note**: This entire project was created using [Claude Code](https://claude.com/claude-code), Anthropic's AI-powered development environment.
